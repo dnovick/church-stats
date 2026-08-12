@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "firstpresportland-org",
+  "name": "First Presbyterian Church of Portland – Love God. Love Our Neighbors.",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.firstpresportland.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(503) 228-7331",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/FirstPresPortland",
+    "instagram": "https://www.instagram.com/firstpresportland/",
+    "youtube": null,
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.firstpresportland.org/",
+      "fetched_at": "2026-08-12T05:18:04.450611Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.firstpresportland.org/church-life/session-elders/",
+      "fetched_at": "2026-08-12T05:18:04.736354Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.firstpresportland.org/about-us/",
+      "fetched_at": "2026-08-12T05:18:04.975905Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "Our active, multi-generational congregation welcomes all with open arms. We are now a Covenant Network Church. Connect with First Presbyterian Church and with each other — through education, worship, and fellowship.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:06.229339Z"
+  },
+  "created_at": "2026-08-12T05:18:04.450611Z",
+  "updated_at": "2026-08-12T05:18:04.450611Z",
+  "notes": null
+}

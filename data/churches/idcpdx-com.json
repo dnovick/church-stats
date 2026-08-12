@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "idcpdx-com",
+  "name": "Imago Dei Community",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://idcpdx.com/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "503-231-5096",
+  "email": "info@idcpdx.com",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": null,
+    "instagram": "https://www.instagram.com/imagodeipdx/",
+    "youtube": "https://www.youtube.com/channel/UCsTtyMR0jEl5ICHINRbEEgA/videos",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://idcpdx.com/",
+      "fetched_at": "2026-08-12T05:21:23.765359Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://idcpdx.com/leadership",
+      "fetched_at": "2026-08-12T05:21:24.132629Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://idcpdx.com/about-1",
+      "fetched_at": "2026-08-12T05:21:24.735483Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "\"Join the Imago Family\" and emphasis on \"Imago Dei Community\" with invitation to join their newsletter and participate together in their seasonal initiatives",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:21:26.764699Z"
+  },
+  "created_at": "2026-08-12T05:21:23.765359Z",
+  "updated_at": "2026-08-12T05:21:23.765359Z",
+  "notes": null
+}

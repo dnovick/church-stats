@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "vafbc-org",
+  "name": "Vancouver Avenue First Baptist Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://vafbc.org/",
+  "description": "VANCOUVER AVENUE FIRST BAPTIST CHURCH - A church where everyone is welcome!",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(503) 282-9496",
+  "email": "vafbchurch1@aol.com",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "http://facebook.com/",
+    "instagram": null,
+    "youtube": "http://youtube.com/",
+    "x": "http://twitter.com/",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://vafbc.org/",
+      "fetched_at": "2026-08-12T05:18:08.055044Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://vafbc.org/about",
+      "fetched_at": "2026-08-12T05:18:08.396023Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "A church where everyone is welcome! / nurturing fellowship, and caring acts that are reflective of our love for God and one another",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:09.577764Z"
+  },
+  "created_at": "2026-08-12T05:18:08.055044Z",
+  "updated_at": "2026-08-12T05:18:08.055044Z",
+  "notes": null
+}

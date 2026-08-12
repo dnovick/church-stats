@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "augustana-org",
+  "name": "Augustana Lutheran Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://augustana.org/",
+  "description": "LIVE & UPCOMING LIVESTREAMS SUNDAY BULLETIN PREVIOUS & UPCOMING LIVESTREAMS Welcome to Augustana Lutheran Church Summer of YES: Youth Empowered to Serve Join Pastor Amy on Wednesdays this summer for a multitude of youth activities! Are you the crafter? The talker? The gamer? Come find out and make meaningful connections along the way. All youth, […]",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(503) 288-6174",
+  "email": "ministry@augustana.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/Augustana-Lutheran-Church-120510994627430",
+    "instagram": null,
+    "youtube": "https://www.youtube.com/c/AugustanaLutheranChurch/featured",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://augustana.org/",
+      "fetched_at": "2026-08-12T05:18:07.428739Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://augustana.org/church-staff/",
+      "fetched_at": "2026-08-12T05:18:08.323174Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "\"Say YES to a summer of building the Beloved Community!\" and \"When you are here, you're home\" emphasize relationships, belonging, and connection as central messaging themes.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:09.596402Z"
+  },
+  "created_at": "2026-08-12T05:18:07.428739Z",
+  "updated_at": "2026-08-12T05:18:07.428739Z",
+  "notes": null
+}
