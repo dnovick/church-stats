@@ -9,6 +9,7 @@ from pydantic import HttpUrl
 from church_stats.models import (
     Address,
     ChurchRecord,
+    Leader,
     MessagingClassification,
     ServiceTime,
     SocialLinks,
@@ -96,11 +97,11 @@ def test_merge_prefers_non_empty_incoming_scraped_fields(tmp_path: Path) -> None
 
 
 def test_merge_preserves_manually_added_fields(tmp_path: Path) -> None:
+    # notes/tags are never scraped, so a re-scan must never touch them.
     repo = ChurchRepository(tmp_path)
     existing = ChurchRecord(
         id="grace-community",
         name="Grace Community",
-        denomination="Baptist",
         notes="Called ahead, very welcoming.",
         tags=["large", "contemporary"],
         created_at=NOW,
@@ -112,9 +113,64 @@ def test_merge_preserves_manually_added_fields(tmp_path: Path) -> None:
 
     merged = repo.merge(existing, incoming)
 
-    assert merged.denomination == "Baptist"
     assert merged.notes == "Called ahead, very welcoming."
     assert merged.tags == ["large", "contemporary"]
+
+
+def test_merge_prefers_fresh_denomination_but_falls_back_to_existing(tmp_path: Path) -> None:
+    repo = ChurchRepository(tmp_path)
+    existing = ChurchRecord(
+        id="grace-community",
+        name="Grace Community",
+        denomination="Baptist",
+        created_at=NOW,
+        updated_at=NOW,
+    )
+
+    # A re-scan that couldn't confidently detect a denomination keeps the
+    # previously-known one rather than wiping it out.
+    incoming_blank = ChurchRecord(
+        id="grace-community", name="Grace Community", created_at=LATER, updated_at=LATER
+    )
+    assert repo.merge(existing, incoming_blank).denomination == "Baptist"
+
+    # A re-scan that *did* find one (site text changed, or extraction
+    # improved) refreshes the stored value.
+    incoming_found = incoming_blank.model_copy(update={"denomination": "Southern Baptist"})
+    assert repo.merge(existing, incoming_found).denomination == "Southern Baptist"
+
+
+def test_merge_replaces_leaders_and_also_known_as_when_incoming_has_any(tmp_path: Path) -> None:
+    repo = ChurchRepository(tmp_path)
+    existing = ChurchRecord(
+        id="grace-community",
+        name="Grace Community",
+        also_known_as=["Grace Fellowship"],
+        leaders=[Leader(name="Jane Doe", title="Former Pastor")],
+        created_at=NOW,
+        updated_at=NOW,
+    )
+    incoming = ChurchRecord(
+        id="grace-community",
+        name="Grace Community",
+        also_known_as=["Grace Community Fellowship"],
+        leaders=[Leader(name="John Smith", title="Senior Pastor")],
+        created_at=LATER,
+        updated_at=LATER,
+    )
+
+    merged = repo.merge(existing, incoming)
+
+    assert merged.also_known_as == ["Grace Community Fellowship"]
+    assert merged.leaders == [Leader(name="John Smith", title="Senior Pastor")]
+
+    # But an incoming scan that found neither keeps what's already stored.
+    incoming_blank = ChurchRecord(
+        id="grace-community", name="Grace Community", created_at=LATER, updated_at=LATER
+    )
+    merged_blank = repo.merge(existing, incoming_blank)
+    assert merged_blank.also_known_as == ["Grace Fellowship"]
+    assert merged_blank.leaders == [Leader(name="Jane Doe", title="Former Pastor")]
 
 
 def test_merge_preserves_extra_fields(tmp_path: Path) -> None:

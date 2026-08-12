@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from church_stats.scraper.extract import extract
+from church_stats.scraper.extract import ExtractedLeader, extract
 
 
 def test_extract_from_rich_page(fixtures_dir: Path) -> None:
@@ -21,6 +21,9 @@ def test_extract_from_rich_page(fixtures_dir: Path) -> None:
     assert data.social_links["facebook"] == "https://www.facebook.com/gracecommunity"
     assert data.social_links["instagram"] == "https://www.instagram.com/gracecommunity"
     assert data.social_links["youtube"] == "https://www.youtube.com/gracecommunity"
+    assert data.also_known_as == ["Grace Fellowship"]
+    assert data.denomination == "Southern Baptist"
+    assert data.leaders == [ExtractedLeader(name="Rev. Maria Gonzalez", title="Senior Pastor")]
 
     assert "Grace Community Church" in data.page_text
     assert "Join us Sundays!" in data.page_text
@@ -38,6 +41,9 @@ def test_extract_from_minimal_page_leaves_fields_unset(fixtures_dir: Path) -> No
     assert data.email is None
     assert data.social_links == {}
     assert data.service_times == []
+    assert data.also_known_as == []
+    assert data.denomination is None
+    assert data.leaders == []
 
 
 def test_extract_handles_graph_wrapped_jsonld_and_opening_hours(fixtures_dir: Path) -> None:
@@ -102,3 +108,22 @@ def test_extract_prefers_jsonld_service_times_over_free_text(fixtures_dir: Path)
 
     assert data.service_times
     assert all(st.raw_text is None for st in data.service_times)
+
+
+def test_extract_falls_back_to_free_text_leaders_without_jsonld(fixtures_dir: Path) -> None:
+    html = (fixtures_dir / "leadership_free_text.html").read_text(encoding="utf-8")
+    data = extract(html)
+
+    assert data.leaders == [
+        ExtractedLeader(name="John Carter", title="Senior Pastor"),
+        ExtractedLeader(name="Amelia Cross", title="Worship Pastor"),
+    ]
+
+
+def test_extract_prefers_jsonld_leaders_over_free_text(fixtures_dir: Path) -> None:
+    html = (fixtures_dir / "sample_church.html").read_text(encoding="utf-8")
+    data = extract(html)
+
+    # sample_church.html has no "Meet the Team"-style heading, so this also
+    # confirms the JSON-LD founder is what's actually driving the result.
+    assert data.leaders == [ExtractedLeader(name="Rev. Maria Gonzalez", title="Senior Pastor")]

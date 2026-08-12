@@ -99,20 +99,24 @@ class ChurchRepository:
         """Merge ``incoming`` into ``existing``, returning the merged record.
 
         Prefers ``incoming`` values only where they're non-empty, so this
-        can't silently erase manually-added fields (denomination, notes,
-        tags, leaders, ...) or data a site temporarily stopped exposing --
-        those come along for free via ``model_copy`` since they're never in
-        ``update``. Sources accumulate; service times are replaced wholesale
-        when the new scan found any, so stale hours don't linger next to
-        fresh ones.
+        can't silently erase data a site temporarily stopped exposing.
+        Fields the scraper never touches (``notes``, ``tags``) come along
+        for free via ``model_copy`` since they're never in ``update``, so
+        manual edits to those always survive a re-scan. Sources accumulate;
+        list fields (``service_times``, ``leaders``, ``also_known_as``) are
+        replaced wholesale when the new scan found any, so stale entries
+        don't linger next to fresh ones.
         """
         update = {
             "name": _prefer_non_empty(existing.name, incoming.name),
             "website": _prefer_non_empty(existing.website, incoming.website),
             "description": _prefer_non_empty(existing.description, incoming.description),
+            "denomination": _prefer_non_empty(existing.denomination, incoming.denomination),
+            "also_known_as": incoming.also_known_as or existing.also_known_as,
             "address": _merge_address(existing.address, incoming.address),
             "phone": _prefer_non_empty(existing.phone, incoming.phone),
             "email": _prefer_non_empty(existing.email, incoming.email),
+            "leaders": incoming.leaders or existing.leaders,
             "service_times": incoming.service_times or existing.service_times,
             "social_links": _merge_social_links(existing.social_links, incoming.social_links),
             "sources": existing.sources + incoming.sources,
