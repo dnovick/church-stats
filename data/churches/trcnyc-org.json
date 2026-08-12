@@ -37,6 +37,21 @@
       "url": "https://www.trcnyc.org/",
       "fetched_at": "2026-08-12T04:54:44.511059Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.trcnyc.org/",
+      "fetched_at": "2026-08-12T05:05:33.615745Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.trcnyc.org/welcome/",
+      "fetched_at": "2026-08-12T05:05:33.974079Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.trcnyc.org/clergy/",
+      "fetched_at": "2026-08-12T05:05:34.319030Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +62,6 @@
     "classified_at": "2026-08-12T04:31:44.872546Z"
   },
   "created_at": "2026-08-12T04:31:43.381335Z",
-  "updated_at": "2026-08-12T04:54:44.511059Z",
+  "updated_at": "2026-08-12T05:05:33.615745Z",
   "notes": null
 }

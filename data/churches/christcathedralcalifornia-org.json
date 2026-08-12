@@ -37,6 +37,21 @@
       "url": "https://www.christcathedralcalifornia.org/",
       "fetched_at": "2026-08-12T04:54:43.617994Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.christcathedralcalifornia.org/",
+      "fetched_at": "2026-08-12T05:05:32.208773Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.christcathedralcalifornia.org/leadership/",
+      "fetched_at": "2026-08-12T05:05:32.334163Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.christcathedralcalifornia.org/welcome/welcome-from-bishop-kevin-vann/",
+      "fetched_at": "2026-08-12T05:05:32.464245Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +62,6 @@
     "classified_at": "2026-08-12T04:31:47.163814Z"
   },
   "created_at": "2026-08-12T04:31:45.046202Z",
-  "updated_at": "2026-08-12T04:54:43.617994Z",
+  "updated_at": "2026-08-12T05:05:32.208773Z",
   "notes": null
 }
