@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "holyrosarypdx-org",
+  "name": "Holy Rosary Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://holyrosarypdx.org/",
+  "description": "A Catholic parish in Portland, OR staffed by the Dominican Friars of the Province of the Most Holy Name of Jesus.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "503.235.3163",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "http://www.facebook.com/HolyRosaryChurchPortland",
+    "instagram": "https://www.instagram.com/holyrosary.pdx",
+    "youtube": "https://www.youtube.com/channel/UCNBwD-hGkqoGbrESW34YJcw",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://holyrosarypdx.org/",
+      "fetched_at": "2026-08-12T05:18:04.615868Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://holyrosarypdx.org/staff",
+      "fetched_at": "2026-08-12T05:18:05.064520Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "traditional_reverence",
+    "confidence": 0.95,
+    "evidence": "Latin Masses celebrated according to the Dominican Rite, Solemn High Mass (1970 Missal), Nocturnal Adoration, Relic Blessing, and emphasis on liturgical worship with detailed Mass times and Divine Office devotions",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:06.411678Z"
+  },
+  "created_at": "2026-08-12T05:18:04.615868Z",
+  "updated_at": "2026-08-12T05:18:04.615868Z",
+  "notes": null
+}

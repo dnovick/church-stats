@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "ainsworthucc-org",
+  "name": "Ainsworth United Church of Christ – a just world for all",
+  "also_known_as": [],
+  "denomination": "United Church of Christ",
+  "website": "https://www.ainsworthucc.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "503-284-8767",
+  "email": "moderator@ainsworthucc.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": null,
+    "instagram": null,
+    "youtube": "http://www,youtube.com/@ainsworthunitedchurchofchr1045",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.ainsworthucc.org/",
+      "fetched_at": "2026-08-12T05:18:09.697563Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.ainsworthucc.org/about-us/",
+      "fetched_at": "2026-08-12T05:18:12.230624Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.ainsworthucc.org/about-us/",
+      "fetched_at": "2026-08-12T05:18:14.659949Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.85,
+    "evidence": "In carrying out the teachings of Jesus, Ainsworth United Church of Christ directly undertakes justice in the life and work of its Congregation to contribute to social, economic, environmental and political change so that the fullness of life is extended to all persons and creation, as Jesus intended.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:16.007573Z"
+  },
+  "created_at": "2026-08-12T05:18:09.697563Z",
+  "updated_at": "2026-08-12T05:18:09.697563Z",
+  "notes": null
+}

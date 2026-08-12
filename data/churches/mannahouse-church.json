@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "mannahouse-church",
+  "name": "Mannahouse",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://mannahouse.church/",
+  "description": "Mannahouse Church is a place for your whole family to belong. Join us Sundays in Portland, Vancouver, Tigard, or Eugene. Safe kids' programs, practical teaching, real community.",
+  "address": {
+    "street": "9200 NE Fremont Street",
+    "city": "Portland",
+    "region": "OR",
+    "postal_code": "97220",
+    "country": "US",
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "+15032552224",
+  "email": "hello@mannahouse.church",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/mannahousechurch",
+    "instagram": "https://www.instagram.com/mannahousechurch/?hl=en",
+    "youtube": "https://www.youtube.com/@mannahouse/streams",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://mannahouse.church/",
+      "fetched_at": "2026-08-12T05:18:04.566271Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.75,
+    "evidence": "\"become a stronger covenant community together\" and \"disciples making disciples through your faithful partnership\" emphasize relational connection and communal identity as central to the church's messaging.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:06.248532Z"
+  },
+  "created_at": "2026-08-12T05:18:04.566271Z",
+  "updated_at": "2026-08-12T05:18:04.566271Z",
+  "notes": null
+}

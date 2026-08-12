@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "multnomahfriends-org",
+  "name": "Multnomah Friends Meeting – Affiliated with the North Pacific Yearly Meeting of the Religious Society of Friends (Quakers)",
+  "also_known_as": [],
+  "denomination": "Quaker",
+  "website": "https://multnomahfriends.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(503) 232-2822",
+  "email": "finance@multnomahfriends.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/groups/872443459491958",
+    "instagram": null,
+    "youtube": null,
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://multnomahfriends.org/",
+      "fetched_at": "2026-08-12T05:18:09.104162Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://multnomahfriends.org/about-us/",
+      "fetched_at": "2026-08-12T05:18:09.519962Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.85,
+    "evidence": "The page prominently features outreach and social justice work including an Immigrant Support Fund, statements on Palestinian-Israeli peace, opposition to war, and explicit commitment to 'take actions, in a spirit of nonviolence and reconciliation' and serving immigrants facing legal challenges.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:11.115252Z"
+  },
+  "created_at": "2026-08-12T05:18:09.104162Z",
+  "updated_at": "2026-08-12T05:18:09.104162Z",
+  "notes": null
+}

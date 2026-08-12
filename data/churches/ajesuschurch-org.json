@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "ajesuschurch-org",
+  "name": "A Jesus Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.ajesuschurch.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": null,
+    "instagram": "http://instagram.com/ajesuschurch",
+    "youtube": "https://www.youtube.com/@ajesuschurch",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.ajesuschurch.org/",
+      "fetched_at": "2026-08-12T05:18:09.891340Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.ajesuschurch.org/about",
+      "fetched_at": "2026-08-12T05:18:10.229147Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "unified, Spirit-filled family that follows the way of Jesus",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:18:11.114750Z"
+  },
+  "created_at": "2026-08-12T05:18:09.891340Z",
+  "updated_at": "2026-08-12T05:18:09.891340Z",
+  "notes": null
+}
