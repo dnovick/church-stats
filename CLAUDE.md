@@ -91,3 +91,22 @@ should leave the field `None` rather than guess when it isn't confident.
 Feature requests, bugs, and schema-change proposals are tracked as **GitHub
 Issues** on this repo (`gh issue list` / `gh issue create`), not as local
 TODO files or comments in code.
+
+## Git workflow
+
+`main` is branch-protected: direct pushes are rejected for everyone,
+including admins (`enforce_admins: true`). All changes go through a branch +
+pull request:
+
+```bash
+git checkout -b <type>/<short-description> main   # e.g. feat/batch-scan, fix/slugify-unicode
+# ... make changes, commit ...
+git push -u origin <branch>
+gh pr create --fill
+gh pr merge --squash --delete-branch
+```
+
+No approving review is required (`required_approving_review_count: 0`) since
+this is a solo-maintainer repo and GitHub doesn't allow self-approval — the
+PR itself, not a review, is the gate. A plain `gh pr merge` is sufficient;
+`--admin` isn't needed since nothing is left to bypass.
