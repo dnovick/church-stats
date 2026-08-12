@@ -40,6 +40,7 @@ class ServiceTime(BaseModel):
     day_of_week: str | None = None
     time: str | None = None
     language: str | None = None
+    raw_text: str | None = None
 
 
 class Leader(BaseModel):
