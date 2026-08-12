@@ -127,3 +127,22 @@ def test_extract_prefers_jsonld_leaders_over_free_text(fixtures_dir: Path) -> No
     # sample_church.html has no "Meet the Team"-style heading, so this also
     # confirms the JSON-LD founder is what's actually driving the result.
     assert data.leaders == [ExtractedLeader(name="Rev. Maria Gonzalez", title="Senior Pastor")]
+
+
+def test_extract_social_links_does_not_substring_match_unrelated_domains() -> None:
+    # Regression test: a church whose own domain happens to *contain* a
+    # social domain as a substring (e.g. "idcpdx.com" contains "x.com")
+    # must not have an unrelated mailto:/relative link misread as that
+    # social link. Matching must be on the parsed netloc, not "domain in
+    # href".
+    html = """
+    <html><body>
+      <a href="mailto:info@idcpdx.com">Email us</a>
+      <a href="/contact">Contact</a>
+      <a href="https://www.facebook.com/idcpdx">Facebook</a>
+      <a href="https://notfacebook.com/spam">Spam</a>
+    </body></html>
+    """
+    data = extract(html)
+
+    assert data.social_links == {"facebook": "https://www.facebook.com/idcpdx"}
