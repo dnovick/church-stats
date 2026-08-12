@@ -47,6 +47,11 @@
       "url": "https://www.thepottershouse.org/",
       "fetched_at": "2026-08-12T04:31:46.677643Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.thepottershouse.org/",
+      "fetched_at": "2026-08-12T04:54:44.110524Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -57,6 +62,6 @@
     "classified_at": "2026-08-12T04:31:48.125800Z"
   },
   "created_at": "2026-08-12T04:31:46.677643Z",
-  "updated_at": "2026-08-12T04:31:46.677643Z",
+  "updated_at": "2026-08-12T04:54:44.110524Z",
   "notes": null
 }
