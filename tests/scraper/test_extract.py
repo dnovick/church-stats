@@ -146,3 +146,19 @@ def test_extract_social_links_does_not_substring_match_unrelated_domains() -> No
     data = extract(html)
 
     assert data.social_links == {"facebook": "https://www.facebook.com/idcpdx"}
+
+
+def test_extract_social_links_normalizes_protocol_relative_urls() -> None:
+    # Regression test: some sites emit protocol-relative hrefs like
+    # "//www.youtube.com/@handle" (no scheme). urlparse() still resolves the
+    # netloc correctly so it's identified as a youtube link, but the raw
+    # value must be normalized to an absolute https:// URL or downstream
+    # HttpUrl validation rejects it as a "relative URL without a base".
+    html = """
+    <html><body>
+      <a href="//www.youtube.com/@crossingstl">YouTube</a>
+    </body></html>
+    """
+    data = extract(html)
+
+    assert data.social_links == {"youtube": "https://www.youtube.com/@crossingstl"}
