@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "cbcstl-org",
+  "name": "Central",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.cbcstl.org/",
+  "description": "Central Baptist Church is a family. We invite you to join us where you can meet Jesus.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "314.533.0747",
+  "email": "askcentral@cbcstl.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/CBCSTL",
+    "instagram": "https://www.instagram.com/cbcstlnews/",
+    "youtube": "https://www.youtube.com/c/CBCSTL",
+    "x": "https://twitter.com/CBCSTL",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.cbcstl.org/",
+      "fetched_at": "2026-08-12T05:30:24.035425Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.75,
+    "evidence": "\"Making Disciples ... Transforming Lives!\" combined with \"There is something for everyone. So let's grow spiritually together\" and emphasis on getting involved in ministry as a community.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:25.474592Z"
+  },
+  "created_at": "2026-08-12T05:30:24.035425Z",
+  "updated_at": "2026-08-12T05:30:24.035425Z",
+  "notes": null
+}

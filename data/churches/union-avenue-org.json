@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "union-avenue-org",
+  "name": "UNION AVENUE CHRISTIAN CHURCH",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "http://www.union-avenue.org/",
+  "description": "Union Avenue Christian Church (Disciples of Christ) is an open and affirming St. Louis, MO, faith community growing in the treasures of justice, stewardship, artistic expression and hospitality.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(314) 361-8844",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "http://www.facebook.com/1456388614668783",
+    "instagram": "http://instagram.com/uaccstl",
+    "youtube": "https://youtube.com/@uaccworship?si=H6xcHFiWTelNy8S3",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "http://www.union-avenue.org/",
+      "fetched_at": "2026-08-12T05:30:27.472529Z",
+      "method": "scraped"
+    },
+    {
+      "url": "http://www.union-avenue.org/our-staff",
+      "fetched_at": "2026-08-12T05:30:27.827873Z",
+      "method": "scraped"
+    },
+    {
+      "url": "http://www.union-avenue.org/#",
+      "fetched_at": "2026-08-12T05:30:28.041645Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.85,
+    "evidence": "Our vision today and as we move into the future is to be a faithful community growing in the treasures of justice, stewardship, artistic expression and hospitality... Our outreach ministries at Union Avenue Christian Church follow Christ's example of reaching out into the world to share, to heal, to offer hope and compassion, and to change lives.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:29.279642Z"
+  },
+  "created_at": "2026-08-12T05:30:27.472529Z",
+  "updated_at": "2026-08-12T05:30:27.472529Z",
+  "notes": null
+}

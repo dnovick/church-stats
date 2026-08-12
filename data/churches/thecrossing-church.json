@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "thecrossing-church",
+  "name": "Home | The Crossing",
+  "also_known_as": [],
+  "denomination": "Non-denominational",
+  "website": "https://thecrossing.church/",
+  "description": "The Crossing church is a multi-site, non denominational church in St. Louis, Missouri. Join us this weekend in Chesterfield, Fenton, Grant's Trail or Mid Rivers.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(636) 532-1212",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/crossingstl",
+    "instagram": "https://www.instagram.com/crossingstl/",
+    "youtube": "https://www.youtube.com/@crossingstl",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://thecrossing.church/",
+      "fetched_at": "2026-08-12T05:34:10.442867Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://thecrossing.church/about",
+      "fetched_at": "2026-08-12T05:34:10.818295Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "practical_relevance",
+    "confidence": 0.85,
+    "evidence": "Bible-based community focused on making the teachings of Jesus practical for everyday life",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:34:12.581347Z"
+  },
+  "created_at": "2026-08-12T05:34:10.442867Z",
+  "updated_at": "2026-08-12T05:34:10.442867Z",
+  "notes": null
+}

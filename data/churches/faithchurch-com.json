@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "faithchurch-com",
+  "name": "Faith Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://faithchurch.com/",
+  "description": "Faith Church is one church with multiple locations and a thriving online community. No matter your age or background, there's a place for you here!",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/yourfaithchurch",
+    "instagram": "http://www.instagram.com/yourfaithchurch",
+    "youtube": "https://www.youtube.com/playlist?list=PLXqPuYhpISt1NqjvlciSaMBqhXodbl1vb",
+    "x": "http://twitter.com/yourfaithchurch",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://faithchurch.com/",
+      "fetched_at": "2026-08-12T05:30:23.936271Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://faithchurch.com/dreamteam/",
+      "fetched_at": "2026-08-12T05:30:24.191317Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://faithchurch.com/about-2/",
+      "fetched_at": "2026-08-12T05:30:24.438310Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "\"We're so excited you're checking out Faith Church\" and \"Our goal is to be a loving and welcoming community where everyone can experience the life-changing love of Jesus\" along with the tagline \"People Connect. Families Grow. Lives Are Changed\" emphasizes relationships, belonging, and community connection as the primary messaging theme.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:26.787145Z"
+  },
+  "created_at": "2026-08-12T05:30:23.936271Z",
+  "updated_at": "2026-08-12T05:30:23.936271Z",
+  "notes": null
+}

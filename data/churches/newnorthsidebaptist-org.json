@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "newnorthsidebaptist-org",
+  "name": "New Northside Missionary Baptist Church (St. Louis, MO) | The Church Where Everybody is Somebody Because Christ is All.",
+  "also_known_as": [],
+  "denomination": "Missionary Baptist",
+  "website": "https://www.newnorthsidebaptist.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "314-381-5730",
+  "email": "nnmbc8645@yahoo.com",
+  "service_times": [],
+  "leaders": [
+    {
+      "name": "Rev. Rodrick K. Burton",
+      "title": "Pastor"
+    }
+  ],
+  "social_links": {
+    "facebook": "https://www.facebook.com/nnmbcstl",
+    "instagram": "https://www.instagram.com/nnmbcstl/",
+    "youtube": "https://www.youtube.com/channel/UCE_HF__M3gIU1sv_95XldcQ/videos",
+    "x": "https://twitter.com/NNMBCSTL",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.newnorthsidebaptist.org/",
+      "fetched_at": "2026-08-12T05:30:29.820687Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.newnorthsidebaptist.org/our-pastor/",
+      "fetched_at": "2026-08-12T05:30:30.829293Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.newnorthsidebaptist.org/about/",
+      "fetched_at": "2026-08-12T05:30:31.755036Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "\"The Church Where Everybody is Somebody Because Christ is All\" and \"Restoring our Community by Restoring our Relationship with God\" emphasize belonging and community restoration as core messaging.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:32.994430Z"
+  },
+  "created_at": "2026-08-12T05:30:29.820687Z",
+  "updated_at": "2026-08-12T05:30:29.820687Z",
+  "notes": null
+}

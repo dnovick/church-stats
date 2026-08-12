@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "secondchurch-net",
+  "name": "Second Presbyterian Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.secondchurch.net/",
+  "description": "Home",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "314-367-0366",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/2PCSTL/",
+    "instagram": "https://www.instagram.com/churchsecondpresbyterian/",
+    "youtube": "https://www.youtube.com/channel/UC26YpI52b4oSS9MR1C_rdrQ",
+    "x": "https://twitter.com/2PCSTL",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.secondchurch.net/",
+      "fetched_at": "2026-08-12T05:30:28.118856Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.secondchurch.net/education",
+      "fetched_at": "2026-08-12T05:30:29.089163Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.75,
+    "evidence": "\"inclusive, progressive congregation\" and \"our doors are open to you\" emphasize welcoming community and belonging, reinforced by references to various group gatherings (worship, Bible study, Food Pantry volunteering, and music ministries) that suggest connection and participation together.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:30.706755Z"
+  },
+  "created_at": "2026-08-12T05:30:28.118856Z",
+  "updated_at": "2026-08-12T05:30:28.118856Z",
+  "notes": null
+}
