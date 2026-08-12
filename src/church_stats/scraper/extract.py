@@ -261,7 +261,9 @@ def _extract_social_links(soup: BeautifulSoup) -> dict[str, str]:
             if key in links:
                 continue
             if netloc == domain or netloc.endswith("." + domain):
-                links[key] = href
+                # Protocol-relative hrefs (e.g. "//www.youtube.com/x") parse a
+                # netloc fine but have no scheme, which HttpUrl() rejects later.
+                links[key] = "https:" + href if href.startswith("//") else href
     return links
 
 
