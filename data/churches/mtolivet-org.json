@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "mtolivet-org",
+  "name": "Mount Olivet",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://mtolivet.org/",
+  "description": "https://onrealm.org/mtolivet/PublicRegistrations/Event?linkString=ZTJlZmMwZGItN2Q5ZC00MDhiLTljOGYtYjE1NjAxNDZmYTA5https://one.bidpal.net/centennialgala2022/ticketing(details:ticketing-summary)",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "612.926.7651",
+  "email": "communications@mtolivet.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/mtolivet",
+    "instagram": "https://www.instagram.com/mtolivet",
+    "youtube": null,
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://mtolivet.org/",
+      "fetched_at": "2026-08-12T04:31:45.348531Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.92,
+    "evidence": "Believing. Belonging. Becoming. Belonging to the community of Jesus Christ.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:46.481433Z"
+  },
+  "created_at": "2026-08-12T04:31:45.348531Z",
+  "updated_at": "2026-08-12T04:31:45.348531Z",
+  "notes": null
+}

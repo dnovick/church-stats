@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "christcathedralcalifornia-org",
+  "name": "Christ Cathedral",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.christcathedralcalifornia.org/",
+  "description": "[...]Read More... from Home Page",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "714-971-2141",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/ChristCathedralCA",
+    "instagram": "https://www.instagram.com/christcathedralca",
+    "youtube": "https://www.youtube.com/@DioceseOrange",
+    "x": "https://www.twitter.com/OrangeDiocese",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.christcathedralcalifornia.org/",
+      "fetched_at": "2026-08-12T04:31:45.046202Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "traditional_reverence",
+    "confidence": 0.85,
+    "evidence": "The page emphasizes the cathedral's sacred liturgical life, cultural and devotional celebrations, pilgrims and visitors for diocesan liturgies and ordinations, and describes Christ Cathedral as 'the spiritual heart and mother church' with 'a powerful sign of faith and hope' - highlighting reverence for tradition, sacred worship, and the significance of the cathedral as a sacred space.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:47.163814Z"
+  },
+  "created_at": "2026-08-12T04:31:45.046202Z",
+  "updated_at": "2026-08-12T04:31:45.046202Z",
+  "notes": null
+}

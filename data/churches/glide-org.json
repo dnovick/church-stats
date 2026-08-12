@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "glide-org",
+  "name": "GLIDE – San Francisco: serving the people of the Tenderloin and San Francisco since 1963 – GLIDE offers individual and collective transformation through compassionate, sustained, comprehensive care to all in need.",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.glide.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": "info@glide.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "http://www.facebook.com/glidesf",
+    "instagram": "http://www.instagram.com/glidesf",
+    "youtube": "http://www.youtube.com/glidesf",
+    "x": "https://twitter.com/glidesf",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.glide.org/",
+      "fetched_at": "2026-08-12T04:31:46.533706Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.95,
+    "evidence": "GLIDE offers individual and collective transformation through compassionate, sustained, comprehensive care to all in need. GLIDE is a nationally recognized center for social justice, dedicated to fighting systemic injustices, creating pathways out of poverty and crisis, and transforming lives.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:48.495475Z"
+  },
+  "created_at": "2026-08-12T04:31:46.533706Z",
+  "updated_at": "2026-08-12T04:31:46.533706Z",
+  "notes": null
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "fourthchurch-org",
+  "name": "Fourth Presbyterian Church: A Light in the City",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.fourthchurch.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "312.787.4570",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/fourthchurch",
+    "instagram": "https://www.instagram.com/fourthchurch/",
+    "youtube": "https://www.youtube.com/@fourthpresbyterianchurchof3492/streams",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.fourthchurch.org/",
+      "fetched_at": "2026-08-12T04:31:45.103759Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.85,
+    "evidence": "\"Since 1871, Fourth Presbyterian Church has served as a light in the city, a place where compassion meets action. Through programs like our Meals Ministry and Chicago Lights' Social Service Center, we provide food, clothing, and essential support to tens of thousands of Chicagoans each year.\"",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:46.278482Z"
+  },
+  "created_at": "2026-08-12T04:31:45.103759Z",
+  "updated_at": "2026-08-12T04:31:45.103759Z",
+  "notes": null
+}

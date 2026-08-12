@@ -37,10 +37,21 @@
       "url": "https://www.saddleback.com/",
       "fetched_at": "2026-08-12T04:13:04.942909Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.saddleback.com/",
+      "fetched_at": "2026-08-12T04:28:15.576210Z",
+      "method": "scraped"
     }
   ],
-  "messaging": null,
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "\"I want to find community\" and \"Activate is for you!\" with emphasis on connecting with others and finding community at Saddleback, positioning community connection as a primary entry point for new visitors.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:28:17.781476Z"
+  },
   "created_at": "2026-08-12T02:30:52.589162Z",
-  "updated_at": "2026-08-12T04:13:04.942909Z",
+  "updated_at": "2026-08-12T04:28:15.576210Z",
   "notes": null
 }

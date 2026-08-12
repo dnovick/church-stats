@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "lakewoodchurch-com",
+  "name": "Lakewood Church | Home",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.lakewoodchurch.com/",
+  "description": "Watch messages, worship, and encouragement from Lakewood Church. Find service times, ways to connect, and resources to strengthen your faith and hope.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": null,
+    "instagram": null,
+    "youtube": null,
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.lakewoodchurch.com/",
+      "fetched_at": "2026-08-12T04:31:43.263760Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "spiritual_encounter",
+    "confidence": 0.75,
+    "evidence": "Lakewood Church's homepage emphasizes experiencing God's presence and worship experience, which is characteristic of churches focused on spiritual encounter messaging.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:44.866066Z"
+  },
+  "created_at": "2026-08-12T04:31:43.263760Z",
+  "updated_at": "2026-08-12T04:31:43.263760Z",
+  "notes": null
+}
