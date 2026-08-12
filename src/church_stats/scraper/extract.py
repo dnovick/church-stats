@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import re
 from dataclasses import dataclass, field
+from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 from bs4.element import Tag
@@ -153,6 +154,14 @@ _LEADER_HEADING_RE = re.compile(
     re.IGNORECASE,
 )
 _MAX_LEADER_CANDIDATES = 5
+
+# Navigation link text tends to be terser than an on-page heading (bare
+# "Staff" or "Team" rather than "Meet Our Staff"), so this is deliberately
+# broader than _LEADER_HEADING_RE.
+_STAFF_LINK_RE = re.compile(
+    r"\bstaff\b|\bleadership\b|\bpastors?\b|\bclergy\b|\bteam\b|\belders?\b", re.IGNORECASE
+)
+_ABOUT_LINK_RE = re.compile(r"\babout\b|who\s+we\s+are", re.IGNORECASE)
 
 
 @dataclass
@@ -548,6 +557,43 @@ def _extract_page_text(html: str) -> str:
 
     text = " ".join(part.strip() for part in parts if part.strip())
     return text[:_PAGE_TEXT_MAX_CHARS]
+
+
+def find_related_page_links(html: str, base_url: str) -> dict[str, str]:
+    """Find same-domain links likely to lead to a staff or about page.
+
+    Best-effort and deliberately narrow: only follows a link whose visible
+    text matches a known phrase, and only within the same domain as
+    ``base_url`` (never crawls off-site, e.g. a donation platform or social
+    media link in the footer). Returns at most one URL per category
+    (``"staff"``, ``"about"``), keyed for the caller to fetch.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    base_netloc = urlparse(base_url).netloc
+    found: dict[str, str] = {}
+
+    for anchor in soup.find_all("a", href=True):
+        if "staff" in found and "about" in found:
+            break
+        if not isinstance(anchor, Tag):
+            continue
+        href = anchor.get("href")
+        if not isinstance(href, str):
+            continue
+        text = anchor.get_text(" ", strip=True)
+        if not text:
+            continue
+
+        resolved = urljoin(base_url, href)
+        if urlparse(resolved).netloc != base_netloc:
+            continue
+
+        if "staff" not in found and _STAFF_LINK_RE.search(text):
+            found["staff"] = resolved
+        elif "about" not in found and _ABOUT_LINK_RE.search(text):
+            found["about"] = resolved
+
+    return found
 
 
 def extract(html: str) -> ExtractedData:

@@ -64,11 +64,14 @@ the page — no guessing from generic words. `leaders` comes from JSON-LD
 `founder`/`employee` entries when present, or free text near a "Meet the
 Team"/"Our Staff" heading ("Name, Title" or "Title: Name"). `also_known_as`
 only comes from JSON-LD `alternateName` — there's no reliable free-text
-fallback for it. All three are homepage-only like service times, so hit
-rate on `leaders`/`also_known_as` in particular is low in practice — most
-churches list staff on a separate page. `tags` stays manual-only
-(alongside `notes`); there's no reliable page signal for a subjective label
-like "large" or "contemporary".
+fallback for it. `tags` stays manual-only (alongside `notes`); there's no
+reliable page signal for a subjective label like "large" or "contemporary".
+
+If the homepage doesn't have `leaders`/`also_known_as`, `scan` follows a
+same-domain "Staff"/"Leadership"/"About" nav link (at most one of each) and
+checks that page too, so these aren't purely homepage-only like service
+times and denomination are. Pass `--no-crawl` for a faster, homepage-only
+scan if you don't need the extra reach.
 
 ### Duplicates and merging
 

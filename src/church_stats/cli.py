@@ -55,6 +55,14 @@ def scan(
         str | None,
         typer.Option(help="Model to use for --classify. Defaults to a low-cost model."),
     ] = None,
+    crawl: Annotated[
+        bool,
+        typer.Option(
+            help="Follow a same-domain staff/about page when leaders or "
+            "also_known_as come up empty on the homepage. Slower; disable "
+            "for a fast homepage-only scan."
+        ),
+    ] = True,
 ) -> None:
     """Scan a church's website and print (and optionally save) the resulting record.
 
@@ -66,7 +74,7 @@ def scan(
     """
     repo = _repository()
     try:
-        record = scan_url(url, classify=classify, classifier_model=classifier_model)
+        record = scan_url(url, classify=classify, classifier_model=classifier_model, crawl=crawl)
     except ImportError:
         typer.echo(
             "--classify requires the 'classify' extra: pip install -e '.[classify]'", err=True
@@ -93,10 +101,10 @@ def _read_urls(path: Path) -> list[str]:
 
 
 def _scan_one(
-    url: str, *, classify: bool, classifier_model: str | None
+    url: str, *, classify: bool, classifier_model: str | None, crawl: bool
 ) -> tuple[str, ChurchRecord | None, str | None]:
     try:
-        record = scan_url(url, classify=classify, classifier_model=classifier_model)
+        record = scan_url(url, classify=classify, classifier_model=classifier_model, crawl=crawl)
     except Exception as exc:
         return url, None, str(exc)
     return url, record, None
@@ -126,6 +134,14 @@ def scan_batch(
         float,
         typer.Option(help="Seconds to wait between dispatching each scan (politeness throttle)."),
     ] = 0.0,
+    crawl: Annotated[
+        bool,
+        typer.Option(
+            help="Follow a same-domain staff/about page when leaders or "
+            "also_known_as come up empty on the homepage. Slower; disable "
+            "for faster, homepage-only scans."
+        ),
+    ] = True,
 ) -> None:
     """Scan many church websites from a file, one URL per line.
 
@@ -162,7 +178,11 @@ def scan_batch(
         for url in urls:
             futures.append(
                 executor.submit(
-                    _scan_one, url, classify=classify, classifier_model=classifier_model
+                    _scan_one,
+                    url,
+                    classify=classify,
+                    classifier_model=classifier_model,
+                    crawl=crawl,
                 )
             )
             if delay:

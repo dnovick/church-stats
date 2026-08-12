@@ -106,6 +106,21 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
   - `tags` is intentionally **not** auto-populated — it's meant to stay a
     manual/curated field (like `notes`), since there's no objective signal
     on a page for a subjective label like "large" or "contemporary".
+  - Multi-page crawl (`crawl=True` default on `scan_url`): when the
+    homepage scan comes up empty on `leaders` and/or `also_known_as`,
+    `find_related_page_links` looks for same-domain nav links whose text
+    suggests a staff or about page ("Staff", "Leadership", "Team",
+    "Pastors", "About", "Who We Are") and `_crawl_related_pages` fetches up
+    to one of each, re-running `extract()` against them and merging in
+    whichever field was still missing. A failed fetch of a related page is
+    skipped, not fatal to the scan. Each additionally-fetched page gets its
+    own `SourceRecord`. `--no-crawl` on `scan`/`scan-batch` disables this
+    for a faster homepage-only scan. Live-tested against all 11 stored
+    churches: correctly followed a staff/about/leadership link on 10/11 and
+    found a real leader on 1/11 (Saddleback → its actual senior pastor) —
+    the rest have no matching nav link (JS-rendered nav) or a staff page
+    whose structure doesn't match the name/title patterns, both of which
+    leave the field empty rather than producing a wrong guess.
 - **`src/church_stats/classifier/`** — optional (`[classify]` extra):
   `themes.py` (the controlled outreach-messaging taxonomy) and
   `messaging.py` (`classify_messaging`: Claude structured outputs, closed-set
@@ -154,16 +169,15 @@ JSON-LD (`@type: Church`/`LocalBusiness`/etc.) is trusted over meta tags,
 which are trusted over regex sniffing of page text. A field extraction
 should leave the field `None` rather than guess when it isn't confident.
 
-Known limitation: `scan` only fetches the one URL given, so a church whose
-service times or staff listing lives on a separate "Visit"/"Times" or
-"Staff"/"About" page (common) won't be found even though the free-text
-parsers could handle the text fine — that's a multi-page-crawling gap, not
-a parsing one. Confirmed live against all 11 stored churches: `leaders` and
-`also_known_as` came back empty on every one (homepages rarely surface
-staff listings or DBA names directly), while `denomination` still hit on
-3/11 since that's often mentioned in homepage prose itself. Worth a future
-issue if the leaders/also_known_as gap turns out to matter a lot in
-practice.
+Known limitation: `scan` still only fetches the *homepage* plus, since the
+`leaders`/`also_known_as` crawl (above), at most one same-domain staff page
+and one about page found by following a nav link — not a general multi-page
+crawl. A church whose service times live on a separate "Visit"/"Times" page
+still won't be found (that fallback isn't wired into the crawl), and a
+staff page reachable only via a JS-rendered nav (no matching `<a>` in the
+static HTML) won't be found either. Worth extending the same crawl pattern
+to service times, or adding a headless-render fallback, if either gap turns
+out to matter a lot in practice.
 
 ## Issue tracking
 
