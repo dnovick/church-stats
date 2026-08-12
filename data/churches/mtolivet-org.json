@@ -37,6 +37,16 @@
       "url": "https://mtolivet.org/",
       "fetched_at": "2026-08-12T04:54:43.837345Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://mtolivet.org/",
+      "fetched_at": "2026-08-12T05:05:32.863928Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://mtolivet.org/pastors-staff/",
+      "fetched_at": "2026-08-12T05:05:32.970933Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +57,6 @@
     "classified_at": "2026-08-12T04:31:46.481433Z"
   },
   "created_at": "2026-08-12T04:31:45.348531Z",
-  "updated_at": "2026-08-12T04:54:43.837345Z",
+  "updated_at": "2026-08-12T05:05:32.863928Z",
   "notes": null
 }

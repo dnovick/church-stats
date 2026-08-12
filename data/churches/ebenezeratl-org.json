@@ -37,6 +37,16 @@
       "url": "https://www.ebenezeratl.org/",
       "fetched_at": "2026-08-12T04:54:45.085981Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.ebenezeratl.org/",
+      "fetched_at": "2026-08-12T05:05:33.563500Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.ebenezeratl.org/our-pastor/",
+      "fetched_at": "2026-08-12T05:05:34.813959Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +57,6 @@
     "classified_at": "2026-08-12T04:31:47.512925Z"
   },
   "created_at": "2026-08-12T04:31:45.809812Z",
-  "updated_at": "2026-08-12T04:54:45.085981Z",
+  "updated_at": "2026-08-12T05:05:33.563500Z",
   "notes": null
 }

@@ -37,6 +37,21 @@
       "url": "https://cathedral.org/",
       "fetched_at": "2026-08-12T04:54:43.586513Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://cathedral.org/",
+      "fetched_at": "2026-08-12T05:05:32.275293Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://cathedral.org/about/",
+      "fetched_at": "2026-08-12T05:05:32.377318Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://cathedral.org/about/leadership/",
+      "fetched_at": "2026-08-12T05:05:32.487686Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +62,6 @@
     "classified_at": "2026-08-12T04:31:45.149030Z"
   },
   "created_at": "2026-08-12T04:31:43.125681Z",
-  "updated_at": "2026-08-12T04:54:43.586513Z",
+  "updated_at": "2026-08-12T05:05:32.275293Z",
   "notes": null
 }

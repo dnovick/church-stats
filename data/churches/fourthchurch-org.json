@@ -37,6 +37,21 @@
       "url": "https://www.fourthchurch.org/",
       "fetched_at": "2026-08-12T04:54:43.709934Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.fourthchurch.org/",
+      "fetched_at": "2026-08-12T05:05:32.370128Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.fourthchurch.org/about/index.html",
+      "fetched_at": "2026-08-12T05:05:32.594713Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.fourthchurch.org/about/staff.html",
+      "fetched_at": "2026-08-12T05:05:32.794669Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +62,6 @@
     "classified_at": "2026-08-12T04:31:46.278482Z"
   },
   "created_at": "2026-08-12T04:31:45.103759Z",
-  "updated_at": "2026-08-12T04:54:43.709934Z",
+  "updated_at": "2026-08-12T05:05:32.370128Z",
   "notes": null
 }

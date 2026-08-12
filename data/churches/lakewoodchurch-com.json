@@ -37,6 +37,11 @@
       "url": "https://www.lakewoodchurch.com/",
       "fetched_at": "2026-08-12T04:54:43.788494Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.lakewoodchurch.com/",
+      "fetched_at": "2026-08-12T05:05:32.693329Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -47,6 +52,6 @@
     "classified_at": "2026-08-12T04:31:44.866066Z"
   },
   "created_at": "2026-08-12T04:31:43.263760Z",
-  "updated_at": "2026-08-12T04:54:43.788494Z",
+  "updated_at": "2026-08-12T05:05:32.693329Z",
   "notes": null
 }

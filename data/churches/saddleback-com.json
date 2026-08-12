@@ -18,7 +18,12 @@
   "phone": null,
   "email": null,
   "service_times": [],
-  "leaders": [],
+  "leaders": [
+    {
+      "name": "Stacie Wood",
+      "title": "Pastor"
+    }
+  ],
   "social_links": {
     "facebook": "https://www.facebook.com/saddlebackchurch",
     "instagram": "https://www.instagram.com/saddlebackchurch/",
@@ -47,6 +52,16 @@
       "url": "https://www.saddleback.com/",
       "fetched_at": "2026-08-12T04:54:44.136693Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.saddleback.com/",
+      "fetched_at": "2026-08-12T05:05:33.362841Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.saddleback.com/about/",
+      "fetched_at": "2026-08-12T05:05:33.743815Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -57,6 +72,6 @@
     "classified_at": "2026-08-12T04:28:17.781476Z"
   },
   "created_at": "2026-08-12T02:30:52.589162Z",
-  "updated_at": "2026-08-12T04:54:44.136693Z",
+  "updated_at": "2026-08-12T05:05:33.362841Z",
   "notes": null
 }
