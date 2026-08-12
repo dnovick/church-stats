@@ -3,7 +3,7 @@
   "id": "cathedral-org",
   "name": "Washington National Cathedral",
   "also_known_as": [],
-  "denomination": null,
+  "denomination": "Episcopal",
   "website": "https://cathedral.org/",
   "description": "Visit, tour, worship, and more at Washington National Cathedral. Join us and explore the world's sixth-largest Gothic cathedral.",
   "address": {
@@ -32,6 +32,11 @@
       "url": "https://cathedral.org/",
       "fetched_at": "2026-08-12T04:31:43.125681Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://cathedral.org/",
+      "fetched_at": "2026-08-12T04:54:43.586513Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -42,6 +47,6 @@
     "classified_at": "2026-08-12T04:31:45.149030Z"
   },
   "created_at": "2026-08-12T04:31:43.125681Z",
-  "updated_at": "2026-08-12T04:31:43.125681Z",
+  "updated_at": "2026-08-12T04:54:43.586513Z",
   "notes": null
 }

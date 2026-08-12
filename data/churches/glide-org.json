@@ -32,6 +32,11 @@
       "url": "https://www.glide.org/",
       "fetched_at": "2026-08-12T04:31:46.533706Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.glide.org/",
+      "fetched_at": "2026-08-12T04:54:43.940022Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -42,6 +47,6 @@
     "classified_at": "2026-08-12T04:31:48.495475Z"
   },
   "created_at": "2026-08-12T04:31:46.533706Z",
-  "updated_at": "2026-08-12T04:31:46.533706Z",
+  "updated_at": "2026-08-12T04:54:43.940022Z",
   "notes": null
 }

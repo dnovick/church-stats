@@ -3,7 +3,7 @@
   "id": "trcnyc-org",
   "name": "Riverside Church",
   "also_known_as": [],
-  "denomination": null,
+  "denomination": "Interdenominational",
   "website": "https://www.trcnyc.org/",
   "description": null,
   "address": {
@@ -32,6 +32,11 @@
       "url": "https://www.trcnyc.org/",
       "fetched_at": "2026-08-12T04:31:43.381335Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.trcnyc.org/",
+      "fetched_at": "2026-08-12T04:54:44.511059Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -42,6 +47,6 @@
     "classified_at": "2026-08-12T04:31:44.872546Z"
   },
   "created_at": "2026-08-12T04:31:43.381335Z",
-  "updated_at": "2026-08-12T04:31:43.381335Z",
+  "updated_at": "2026-08-12T04:54:44.511059Z",
   "notes": null
 }

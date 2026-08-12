@@ -3,7 +3,7 @@
   "id": "christcathedralcalifornia-org",
   "name": "Christ Cathedral",
   "also_known_as": [],
-  "denomination": null,
+  "denomination": "Roman Catholic",
   "website": "https://www.christcathedralcalifornia.org/",
   "description": "[...]Read More... from Home Page",
   "address": {
@@ -32,6 +32,11 @@
       "url": "https://www.christcathedralcalifornia.org/",
       "fetched_at": "2026-08-12T04:31:45.046202Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.christcathedralcalifornia.org/",
+      "fetched_at": "2026-08-12T04:54:43.617994Z",
+      "method": "scraped"
     }
   ],
   "messaging": {
@@ -42,6 +47,6 @@
     "classified_at": "2026-08-12T04:31:47.163814Z"
   },
   "created_at": "2026-08-12T04:31:45.046202Z",
-  "updated_at": "2026-08-12T04:31:45.046202Z",
+  "updated_at": "2026-08-12T04:54:43.617994Z",
   "notes": null
 }
