@@ -37,6 +37,7 @@ pytest tests/test_storage.py::test_save_and_load_round_trip  # single test
 church-stats scan <url>          # scan a church site and save the record
 church-stats scan <url> --no-save
 church-stats scan <url> --classify   # also classify outreach messaging (needs the classify extra)
+church-stats scan-batch urls.txt     # scan many URLs concurrently; failures don't abort the batch
 church-stats list
 church-stats show <church-id>
 ```
@@ -76,7 +77,11 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
   up an unintended auth source. A `.env` in the project root only affects
   `church-stats`'s own process — it's never read by Claude Code.
 - **`src/church_stats/cli.py`** — Typer app wiring the scraper and
-  repository together (`scan`, `list`, `show`).
+  repository together (`scan`, `scan-batch`, `list`, `show`). `scan-batch`
+  runs URLs through a bounded `ThreadPoolExecutor` (`--concurrency`) and
+  isolates per-URL failures (network errors, bad URLs, etc.) so one bad site
+  doesn't abort the rest of the batch — each result is reported as it
+  completes, with a summary at the end.
 
 ### Schema evolution
 

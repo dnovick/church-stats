@@ -31,7 +31,15 @@ church-stats list
 
 # Show one stored record
 church-stats show example-church-org
+
+# Scan many churches from a file (one URL per line, # comments ok)
+church-stats scan-batch urls.txt
 ```
+
+`scan-batch` scans URLs concurrently (`--concurrency`, default 5) and
+reports failures per-URL instead of aborting the whole run — see the
+`Scanned N: X succeeded, Y failed` summary at the end. Use `--delay` to
+space out requests if you want to be gentler on the sites you're scanning.
 
 ### Classifying outreach messaging (optional)
 
