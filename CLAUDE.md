@@ -86,6 +86,26 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
     show up in too much unrelated page content to trust without that
     signal — and every free-text-derived `ServiceTime` carries the original
     matched text in `raw_text` (`None` for JSON-LD-derived ones).
+  - `also_known_as`: JSON-LD `alternateName` only. No free-text fallback —
+    detecting a DBA-style alternate name from prose reliably isn't feasible,
+    so this stays `None`/empty rather than guess.
+  - `denomination`: no free-text-fallback split here — there's no reliable
+    JSON-LD property for it, so `_extract_denomination` always runs a
+    curated keyword match (`_DENOMINATION_ALIASES`) against the full page
+    text. Deliberately only exact, mostly-unambiguous denomination
+    names/abbreviations (e.g. "Southern Baptist", "PCUSA") — no bare
+    generic words like "Baptist" or "Christian" that show up constantly in
+    unrelated contexts.
+  - `leaders`: JSON-LD `founder`/`employee`/`member` `Person` entries
+    (`name` + `jobTitle`) are trusted first. Fallback: find headings like
+    "Our Staff"/"Leadership"/"Meet the Team" (`_find_leader_candidates`),
+    then parse "Name, Title" and "Title: Name" pairs anchored on a curated
+    title-keyword list (`_LEADER_TITLE_KEYWORDS`) so an unrelated comma
+    between two capitalized words elsewhere on the page can't be misread as
+    a leader.
+  - `tags` is intentionally **not** auto-populated — it's meant to stay a
+    manual/curated field (like `notes`), since there's no objective signal
+    on a page for a subjective label like "large" or "contemporary".
 - **`src/church_stats/classifier/`** — optional (`[classify]` extra):
   `themes.py` (the controlled outreach-messaging taxonomy) and
   `messaging.py` (`classify_messaging`: Claude structured outputs, closed-set
@@ -135,10 +155,15 @@ which are trusted over regex sniffing of page text. A field extraction
 should leave the field `None` rather than guess when it isn't confident.
 
 Known limitation: `scan` only fetches the one URL given, so a church whose
-service times live on a separate "Visit"/"Times" page (common) won't be
-found even though the free-text parser could handle the text fine — that's
-a multi-page-crawling gap, not a parsing one. Worth a future issue if it
-turns out to matter a lot in practice.
+service times or staff listing lives on a separate "Visit"/"Times" or
+"Staff"/"About" page (common) won't be found even though the free-text
+parsers could handle the text fine — that's a multi-page-crawling gap, not
+a parsing one. Confirmed live against all 11 stored churches: `leaders` and
+`also_known_as` came back empty on every one (homepages rarely surface
+staff listings or DBA names directly), while `denomination` still hit on
+3/11 since that's often mentioned in homepage prose itself. Worth a future
+issue if the leaders/also_known_as gap turns out to matter a lot in
+practice.
 
 ## Issue tracking
 

@@ -4,13 +4,13 @@ A data collection and analysis toolset for harvesting, managing, and analyzing
 information about Christian churches.
 
 Given a church's website URL, `church-stats` scans the site and extracts
-structured information (name, address, contact info, service times, social
-links, ...) into a local JSON store — one file per church under
-`data/churches/`. The schema is intentionally flexible and evolves over time;
-see `CLAUDE.md` for the schema-evolution convention. Re-scanning a URL
-already in the store merges the fresh scrape into the existing record
-instead of overwriting it, so manually-added fields (notes, tags,
-denomination, ...) survive re-scans — see "Duplicates and merging" below.
+structured information (name, denomination, address, contact info, service
+times, leaders, social links, ...) into a local JSON store — one file per
+church under `data/churches/`. The schema is intentionally flexible and
+evolves over time; see `CLAUDE.md` for the schema-evolution convention.
+Re-scanning a URL already in the store merges the fresh scrape into the
+existing record instead of overwriting it, so manually-added fields (notes,
+tags) survive re-scans — see "Duplicates and merging" below.
 
 ## Install
 
@@ -55,6 +55,20 @@ with no confidently-parseable time is only kept when the same block
 resolved a real time elsewhere, and its original text is preserved in
 `raw_text` for review. This is homepage-only — a church whose times live on
 a separate "Visit" page won't be picked up yet.
+
+### Denomination, leaders, and alternate names
+
+`denomination` is matched against a curated list of known U.S. denomination
+names/abbreviations (e.g. "Southern Baptist", "PCUSA") found anywhere on
+the page — no guessing from generic words. `leaders` comes from JSON-LD
+`founder`/`employee` entries when present, or free text near a "Meet the
+Team"/"Our Staff" heading ("Name, Title" or "Title: Name"). `also_known_as`
+only comes from JSON-LD `alternateName` — there's no reliable free-text
+fallback for it. All three are homepage-only like service times, so hit
+rate on `leaders`/`also_known_as` in particular is low in practice — most
+churches list staff on a separate page. `tags` stays manual-only
+(alongside `notes`); there's no reliable page signal for a subjective label
+like "large" or "contemporary".
 
 ### Duplicates and merging
 

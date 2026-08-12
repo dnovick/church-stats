@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from church_stats.classifier import messaging as messaging_module
-from church_stats.models import MessagingClassification
+from church_stats.models import Leader, MessagingClassification
 from church_stats.scraper import pipeline
 
 
@@ -25,6 +25,9 @@ def test_scan_url_builds_record_from_fetched_html(
     assert record.phone == "(555) 123-4567"
     assert record.sources[0].method == "scraped"
     assert str(record.sources[0].url) == "https://www.gracecommunity.example/"
+    assert record.also_known_as == ["Grace Fellowship"]
+    assert record.denomination == "Southern Baptist"
+    assert record.leaders == [Leader(name="Rev. Maria Gonzalez", title="Senior Pastor")]
 
 
 def test_scan_url_maps_extracted_service_times(

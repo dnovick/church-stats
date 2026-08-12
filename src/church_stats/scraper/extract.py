@@ -74,6 +74,86 @@ _SERVICE_TIME_HEADING_RE = re.compile(
 _HEADING_TAGS = ("h1", "h2", "h3", "h4", "h5", "h6", "strong", "b")
 _MAX_SERVICE_TIME_CANDIDATES = 5
 
+# A church's own text is trusted here (unlike scan_url's HTML, this is
+# our own curated vocabulary), so exact, mostly-unambiguous denomination
+# names/abbreviations only -- no bare generic words like "Baptist" or
+# "Christian" that show up constantly in unrelated contexts.
+_DENOMINATION_ALIASES: dict[str, str] = {
+    "southern baptist": "Southern Baptist",
+    "american baptist": "American Baptist",
+    "national baptist": "National Baptist",
+    "missionary baptist": "Missionary Baptist",
+    "independent baptist": "Independent Baptist",
+    "presbyterian church (u.s.a.)": "Presbyterian Church (U.S.A.)",
+    "presbyterian church in america": "Presbyterian Church in America",
+    "pcusa": "Presbyterian Church (U.S.A.)",
+    "united methodist": "United Methodist",
+    "african methodist episcopal": "African Methodist Episcopal",
+    "evangelical lutheran church in america": "Evangelical Lutheran Church in America",
+    "lutheran church–missouri synod": "Lutheran Church–Missouri Synod",
+    "lutheran church-missouri synod": "Lutheran Church–Missouri Synod",
+    "roman catholic": "Roman Catholic",
+    "assemblies of god": "Assemblies of God",
+    "church of the nazarene": "Church of the Nazarene",
+    "seventh-day adventist": "Seventh-day Adventist",
+    "united church of christ": "United Church of Christ",
+    "christian church (disciples of christ)": "Christian Church (Disciples of Christ)",
+    "orthodox church in america": "Orthodox Church in America",
+    "greek orthodox": "Greek Orthodox",
+    "episcopal": "Episcopal",
+    "anglican": "Anglican",
+    "pentecostal": "Pentecostal",
+    "mennonite": "Mennonite",
+    "quaker": "Quaker",
+    "unitarian universalist": "Unitarian Universalist",
+    "non-denominational": "Non-denominational",
+    "nondenominational": "Non-denominational",
+    "interdenominational": "Interdenominational",
+}
+_DENOMINATION_RE = re.compile(
+    r"\b("
+    + "|".join(re.escape(k) for k in sorted(_DENOMINATION_ALIASES, key=len, reverse=True))
+    + r")\b",
+    re.IGNORECASE,
+)
+
+_LEADER_TITLE_KEYWORDS = [
+    "Senior Pastor",
+    "Lead Pastor",
+    "Founding Pastor",
+    "Executive Pastor",
+    "Associate Pastor",
+    "Campus Pastor",
+    "Youth Pastor",
+    "Worship Pastor",
+    "Teaching Pastor",
+    "Children's Pastor",
+    "Care Pastor",
+    "Pastor",
+    "Priest",
+    "Rector",
+    "Bishop",
+    "Rabbi",
+    "Imam",
+    "Elder",
+    "Deacon",
+    "Reverend",
+    "Minister",
+    "Chaplain",
+]
+_TITLE_ALTERNATION = "|".join(
+    re.escape(t) for t in sorted(_LEADER_TITLE_KEYWORDS, key=len, reverse=True)
+)
+_NAME_PATTERN = r"(?:[A-Z][a-zA-Z'’.-]*\s+){1,3}[A-Z][a-zA-Z'’.-]*"
+_LEADER_NAME_TITLE_RE = re.compile(rf"\b({_NAME_PATTERN})\s*,\s*({_TITLE_ALTERNATION})\b")
+_LEADER_TITLE_NAME_RE = re.compile(rf"\b({_TITLE_ALTERNATION})\s*[:\-–]\s*({_NAME_PATTERN})\b")
+_LEADER_HEADING_RE = re.compile(
+    r"our\s+staff|leadership|meet\s+the\s+team|our\s+pastors?|pastoral\s+staff"
+    r"|our\s+team|our\s+clergy",
+    re.IGNORECASE,
+)
+_MAX_LEADER_CANDIDATES = 5
+
 
 @dataclass
 class ExtractedServiceTime:
@@ -92,6 +172,12 @@ class _TimeToken:
 
 
 @dataclass
+class ExtractedLeader:
+    name: str
+    title: str | None = None
+
+
+@dataclass
 class ExtractedData:
     name: str | None = None
     description: str | None = None
@@ -102,8 +188,11 @@ class ExtractedData:
     region: str | None = None
     postal_code: str | None = None
     country: str | None = None
+    denomination: str | None = None
+    also_known_as: list[str] = field(default_factory=list)
     social_links: dict[str, str] = field(default_factory=dict)
     service_times: list[ExtractedServiceTime] = field(default_factory=list)
+    leaders: list[ExtractedLeader] = field(default_factory=list)
     page_text: str = ""
 
 
@@ -139,6 +228,13 @@ def _extract_contact(text: str) -> tuple[str | None, str | None]:
     phone = phone_match.group(0) if phone_match else None
     email = email_match.group(0) if email_match else None
     return phone, email
+
+
+def _extract_denomination(text: str) -> str | None:
+    match = _DENOMINATION_RE.search(text)
+    if not match:
+        return None
+    return _DENOMINATION_ALIASES[match.group(0).lower()]
 
 
 def _extract_social_links(soup: BeautifulSoup) -> dict[str, str]:
@@ -211,6 +307,25 @@ def _apply_jsonld(entry: dict[str, object], data: ExtractedData) -> None:
     for spec in _as_list(entry.get("openingHoursSpecification")):
         if isinstance(spec, dict):
             data.service_times.extend(_service_times_from_spec(spec))
+
+    for alt_name in _as_list(entry.get("alternateName")):
+        if isinstance(alt_name, str) and alt_name not in data.also_known_as:
+            data.also_known_as.append(alt_name)
+
+    for key in ("founder", "employee", "member"):
+        for person in _as_list(entry.get(key)):
+            leader = _leader_from_jsonld(person)
+            if leader is not None:
+                data.leaders.append(leader)
+
+
+def _leader_from_jsonld(value: object) -> ExtractedLeader | None:
+    if not isinstance(value, dict):
+        return None
+    name = _str_or_none(value.get("name"))
+    if not name:
+        return None
+    return ExtractedLeader(name=name, title=_str_or_none(value.get("jobTitle")))
 
 
 def _str_or_none(value: object) -> str | None:
@@ -346,6 +461,75 @@ def _find_service_time_candidates(soup: BeautifulSoup) -> list[str]:
     return candidates
 
 
+def _find_leader_candidates(soup: BeautifulSoup) -> list[str]:
+    """Find text blocks likely to list church leadership: a heading whose
+    text matches common phrasing ("Our Staff", "Leadership", ...) plus its
+    following siblings, joined with ", " so a name in its own element right
+    before a title in the next one reads the same as "Name, Title" in a
+    single line of text."""
+    candidates: list[str] = []
+    seen: set[str] = set()
+
+    for heading in soup.find_all(_HEADING_TAGS):
+        if not isinstance(heading, Tag):
+            continue
+        heading_text = heading.get_text(" ", strip=True)
+        if not _LEADER_HEADING_RE.search(heading_text):
+            continue
+
+        parts = []
+        for sibling in heading.find_next_siblings(limit=10):
+            if isinstance(sibling, Tag):
+                sibling_text = sibling.get_text(" ", strip=True)
+                if sibling_text:
+                    parts.append(sibling_text)
+
+        candidate = ", ".join(parts).strip()
+        if candidate and candidate not in seen:
+            seen.add(candidate)
+            candidates.append(candidate)
+
+        if len(candidates) >= _MAX_LEADER_CANDIDATES:
+            break
+
+    return candidates
+
+
+def _clean_leader(name: str, title: str) -> ExtractedLeader | None:
+    name = name.strip().strip(",")
+    title = title.strip()
+    if not name or not title:
+        return None
+    return ExtractedLeader(name=name, title=title)
+
+
+def _parse_leaders_from_text(text: str) -> list[ExtractedLeader]:
+    """Parse "Name, Title" and "Title: Name" pairs, anchored on a curated
+    title-keyword list so a comma between two capitalized words elsewhere
+    on the page doesn't get misread as a leader."""
+    leaders: list[ExtractedLeader] = []
+    for match in _LEADER_NAME_TITLE_RE.finditer(text):
+        leader = _clean_leader(match.group(1), match.group(2))
+        if leader is not None:
+            leaders.append(leader)
+    for match in _LEADER_TITLE_NAME_RE.finditer(text):
+        leader = _clean_leader(match.group(2), match.group(1))
+        if leader is not None:
+            leaders.append(leader)
+    return leaders
+
+
+def _dedupe_leaders(leaders: list[ExtractedLeader]) -> list[ExtractedLeader]:
+    seen: set[tuple[str, str | None]] = set()
+    deduped: list[ExtractedLeader] = []
+    for leader in leaders:
+        key = (leader.name, leader.title)
+        if key not in seen:
+            seen.add(key)
+            deduped.append(leader)
+    return deduped
+
+
 def _extract_page_text(html: str) -> str:
     """Pull representative page text for downstream classification.
 
@@ -389,9 +573,17 @@ def extract(html: str) -> ExtractedData:
             data.service_times.extend(_parse_service_times_from_text(candidate))
         data.service_times = _dedupe_service_times(data.service_times)
 
-    phone, email = _extract_contact(soup.get_text(separator=" "))
+    data.leaders = _dedupe_leaders(data.leaders)
+    if not data.leaders:
+        for candidate in _find_leader_candidates(soup):
+            data.leaders.extend(_parse_leaders_from_text(candidate))
+        data.leaders = _dedupe_leaders(data.leaders)
+
+    full_text = soup.get_text(separator=" ")
+    phone, email = _extract_contact(full_text)
     data.phone = data.phone or phone
     data.email = data.email or email
+    data.denomination = _extract_denomination(full_text)
 
     return data
 
