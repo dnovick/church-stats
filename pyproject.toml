@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "church-stats"
+version = "0.1.0"
+description = "Data collection and analysis toolset for harvesting, managing, and analyzing information about Christian churches."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "requests>=2.31",
+    "beautifulsoup4>=4.12",
+    "pydantic>=2.5",
+    "typer>=0.12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.10",
+    "flake8>=7.0",
+    "Flake8-pyproject>=1.2",
+    "black>=24.0",
+    "isort>=5.13",
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "types-requests",
+    "types-beautifulsoup4",
+]
+
+[project.scripts]
+church-stats = "church_stats.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/church_stats"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests"]
+
+[tool.flake8]
+max-line-length = 100
+extend-ignore = ["E203", "W503"]
+exclude = [".venv", "build", "dist"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
