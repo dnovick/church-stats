@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "cathedralguadalupe-org",
+  "name": "Cathedral Guadalupe | Downtown Dallas Catholic Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.cathedralguadalupe.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": null,
+    "instagram": null,
+    "youtube": null,
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.cathedralguadalupe.org/",
+      "fetched_at": "2026-08-12T05:26:44.122809Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "traditional_reverence",
+    "confidence": 0.85,
+    "evidence": "The page emphasizes liturgical mass schedules with specific priests, virtual candles, and formal Catholic ritual practices. The presentation of 'Mass in English' and 'Misa en Español' alongside traditional devotional elements like prayer intentions demonstrates the cathedral's focus on reverent, liturgical worship experience typical of traditional Catholic cathedral ministry.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:46.020502Z"
+  },
+  "created_at": "2026-08-12T05:26:44.122809Z",
+  "updated_at": "2026-08-12T05:26:44.122809Z",
+  "notes": null
+}

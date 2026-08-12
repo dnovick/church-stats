@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "ibocchurch-org",
+  "name": "Mega Church in Dallas TX",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.ibocchurch.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": "INFO@IBOCCHURCH.ORG",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/InspiringBodyofChristChurch",
+    "instagram": "https://www.instagram.com/ibocdallas/",
+    "youtube": "https://www.youtube.com/user/IBOCDALLAS",
+    "x": "https://twitter.com/ibocchurch",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.ibocchurch.org/",
+      "fetched_at": "2026-08-12T05:26:44.060819Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "spiritual_encounter",
+    "confidence": 0.92,
+    "evidence": "\"you will definitely experience God, His Son, and the Holy Spirit through song, prayer, praise, worship, laughter, and in the power-packed, delivered Word of God\"",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:45.385903Z"
+  },
+  "created_at": "2026-08-12T05:26:44.060819Z",
+  "updated_at": "2026-08-12T05:26:44.060819Z",
+  "notes": null
+}

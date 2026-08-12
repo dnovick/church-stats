@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "firstdallas-org",
+  "name": "First Baptist Dallas - Biblical Truth and Community",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.firstdallas.org/",
+  "description": "Located in the heart of downtown, First Baptist Dallas was built on the Bible and continues its mission to transform the world with God’s Word…one life at a time.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(214) 969-0111",
+  "email": "info@firstdallas.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/fbcdallas",
+    "instagram": "https://instagram.com/firstdallas/",
+    "youtube": "https://www.youtube.com/user/firstbaptistdallas?feature=results_main",
+    "x": "https://twitter.com/firstdallas",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.firstdallas.org/",
+      "fetched_at": "2026-08-12T05:26:41.151783Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.firstdallas.org/#7",
+      "fetched_at": "2026-08-12T05:26:41.807827Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "biblical_teaching",
+    "confidence": 0.85,
+    "evidence": "Your Home for Biblical Truth and Community - the tagline emphasizes 'Biblical Truth' as a primary identifier, combined with sermon series like 'Retracing Your Spiritual Roots' focused on Genesis 1-11 to 'explore the foundational truths that shape our faith' and 'dig deeper into God's Word.'",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:43.692518Z"
+  },
+  "created_at": "2026-08-12T05:26:41.151783Z",
+  "updated_at": "2026-08-12T05:26:41.151783Z",
+  "notes": null
+}
