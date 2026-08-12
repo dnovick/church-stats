@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "ebenezeratl-org",
+  "name": "Ebenezer",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.ebenezeratl.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(404) 688-7300",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/historicebenezerbaptistchurch/",
+    "instagram": "https://www.instagram.com/ebenezer_atl/?hl=en",
+    "youtube": "https://www.youtube.com/channel/UCrxbLgFLTICNzbXF4nl0-qQ",
+    "x": "https://twitter.com/ebenezer_atl",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.ebenezeratl.org/",
+      "fetched_at": "2026-08-12T04:31:45.809812Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.75,
+    "evidence": "urban-based, global ministry dedicated to individual growth and social transformation through living in the message and carrying out the mission of Jesus Christ",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:47.512925Z"
+  },
+  "created_at": "2026-08-12T04:31:45.809812Z",
+  "updated_at": "2026-08-12T04:31:45.809812Z",
+  "notes": null
+}

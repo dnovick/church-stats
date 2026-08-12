@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "northpoint-org",
+  "name": "Life is complicated. You want to get it | North Point Community Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://northpoint.org/",
+  "description": "Life is complicated. You want to get it right. We want to help.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "678.892.5000",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://facebook.com/northpointalpharetta",
+    "instagram": "https://instagram.com/northpointcommunitychurch",
+    "youtube": "https://www.youtube.com/channel/UCK-W_Hlq4a61XNfZl5VoNwA",
+    "x": "https://twitter.com/northpoint",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://northpoint.org/",
+      "fetched_at": "2026-08-12T04:31:43.667941Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "practical_relevance",
+    "confidence": 0.92,
+    "evidence": "Life is complicated. You want to get it right. We want to help... discover a practical faith that leads to greater meaning and direction in life",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:44.739052Z"
+  },
+  "created_at": "2026-08-12T04:31:43.667941Z",
+  "updated_at": "2026-08-12T04:31:43.667941Z",
+  "notes": null
+}

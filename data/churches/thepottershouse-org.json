@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "id": "thepottershouse-org",
+  "name": "Worship, Ministries & Purpose | The Potter's House Dallas",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.thepottershouse.org/",
+  "description": "Visit The Potter’s House in Dallas and experience powerful worship, life-changing messages, ministries, and community. Find your place and live your purpose.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [
+    {
+      "name": null,
+      "day_of_week": "Sunday",
+      "time": "09:00",
+      "language": null,
+      "raw_text": "Sundays: 9 AM CT"
+    },
+    {
+      "name": null,
+      "day_of_week": "Wednesday",
+      "time": "19:00",
+      "language": null,
+      "raw_text": "Wednesdays: 7 PM CT LOCATION 6777 W. KIEST BLVD. DALLAS, TX 75236"
+    }
+  ],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/tphdallas/",
+    "instagram": "https://www.instagram.com/tphdallas/",
+    "youtube": "https://www.youtube.com/@TPHDallas",
+    "x": "https://x.com/tphdallas",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.thepottershouse.org/",
+      "fetched_at": "2026-08-12T04:31:46.677643Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.92,
+    "evidence": "\"THERE'S A PLACE FOR YOU - Discover community where you can grow, serve, and belong\" and \"You belong here\" appear prominently, emphasizing relationships, belonging, and connection as the central messaging theme.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:48.125800Z"
+  },
+  "created_at": "2026-08-12T04:31:46.677643Z",
+  "updated_at": "2026-08-12T04:31:46.677643Z",
+  "notes": null
+}

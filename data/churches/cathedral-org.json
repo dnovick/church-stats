@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "cathedral-org",
+  "name": "Washington National Cathedral",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://cathedral.org/",
+  "description": "Visit, tour, worship, and more at Washington National Cathedral. Join us and explore the world's sixth-largest Gothic cathedral.",
+  "address": {
+    "street": "3101 Wisconsin Ave. NW",
+    "city": "Washington",
+    "region": "DC",
+    "postal_code": "20016",
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(202) 537-6200",
+  "email": "info@cathedral.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/WNCathedral/",
+    "instagram": "https://www.instagram.com/wncathedral/",
+    "youtube": "https://www.youtube.com/@wncathedral",
+    "x": "https://twitter.com/wncathedral/",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://cathedral.org/",
+      "fetched_at": "2026-08-12T04:31:43.125681Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "traditional_reverence",
+    "confidence": 0.85,
+    "evidence": "The page emphasizes 'A House of Prayer For All People,' liturgical worship including 'Morning Prayer,' 'Noon Eucharist,' and 'soul-stirring music,' combined with extensive focus on 'majestic architecture,' 'art & architecture,' and 'stained glass windows,' which collectively highlight the sacred, reverent, and traditional aspects of the Cathedral experience.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T04:31:45.149030Z"
+  },
+  "created_at": "2026-08-12T04:31:43.125681Z",
+  "updated_at": "2026-08-12T04:31:43.125681Z",
+  "notes": null
+}
