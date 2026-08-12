@@ -254,8 +254,13 @@ def _extract_social_links(soup: BeautifulSoup) -> dict[str, str]:
         href = anchor.get("href")
         if not isinstance(href, str):
             continue
+        netloc = urlparse(href).netloc.lower()
+        if not netloc:
+            continue  # e.g. mailto:/tel:/relative links -- not a social link
         for domain, key in _SOCIAL_DOMAINS.items():
-            if domain in href and key not in links:
+            if key in links:
+                continue
+            if netloc == domain or netloc.endswith("." + domain):
                 links[key] = href
     return links
 
