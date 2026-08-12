@@ -28,6 +28,9 @@ _SOCIAL_DOMAINS = {
 
 _CHURCH_JSONLD_TYPES = {"church", "localbusiness", "place", "religiousorganization"}
 
+_BOILERPLATE_TAGS = ("nav", "footer", "header", "script", "style")
+_PAGE_TEXT_MAX_CHARS = 6000
+
 
 @dataclass
 class ExtractedServiceTime:
@@ -50,6 +53,7 @@ class ExtractedData:
     country: str | None = None
     social_links: dict[str, str] = field(default_factory=dict)
     service_times: list[ExtractedServiceTime] = field(default_factory=list)
+    page_text: str = ""
 
 
 def _meta_content(
@@ -186,6 +190,26 @@ def _service_times_from_spec(spec: dict[str, object]) -> list[ExtractedServiceTi
     ]
 
 
+def _extract_page_text(html: str) -> str:
+    """Pull representative page text for downstream classification.
+
+    Uses a separate parse of the same HTML so stripping boilerplate here
+    doesn't affect the other extractors (social links, for one, often live
+    in the footer we're removing).
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.find_all(_BOILERPLATE_TAGS):
+        tag.decompose()
+
+    parts = [part for part in (soup.title.string if soup.title else None,) if part]
+    body_text = soup.get_text(separator=" ", strip=True)
+    if body_text:
+        parts.append(body_text)
+
+    text = " ".join(part.strip() for part in parts if part.strip())
+    return text[:_PAGE_TEXT_MAX_CHARS]
+
+
 def extract(html: str) -> ExtractedData:
     """Extract best-effort church data from a page's HTML."""
     soup = BeautifulSoup(html, "html.parser")
@@ -193,6 +217,7 @@ def extract(html: str) -> ExtractedData:
         name=_extract_name(soup),
         description=_extract_description(soup),
         social_links=_extract_social_links(soup),
+        page_text=_extract_page_text(html),
     )
 
     for entry in _iter_jsonld(soup):

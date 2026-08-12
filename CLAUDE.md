@@ -16,6 +16,9 @@ store.
 # Install (editable, with dev dependencies)
 pip install -e '.[dev]'
 
+# Also install the optional Claude-API-backed classifier
+pip install -e '.[classify]'
+
 # Type check (strict) — must be clean before committing
 python -m mypy src
 
@@ -33,6 +36,7 @@ pytest tests/test_storage.py::test_save_and_load_round_trip  # single test
 # CLI
 church-stats scan <url>          # scan a church site and save the record
 church-stats scan <url> --no-save
+church-stats scan <url> --classify   # also classify outreach messaging (needs the classify extra)
 church-stats list
 church-stats show <church-id>
 ```
@@ -58,6 +62,12 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
   `extract.py` (heuristic `BeautifulSoup`/JSON-LD extraction into an
   `ExtractedData` dataclass), `pipeline.py` (`scan_url`: fetch → extract →
   build a `ChurchRecord`, without saving it).
+- **`src/church_stats/classifier/`** — optional (`[classify]` extra):
+  `themes.py` (the controlled outreach-messaging taxonomy) and
+  `messaging.py` (`classify_messaging`: Claude structured outputs, closed-set
+  theme + confidence + evidence). Wired into `pipeline.scan_url` via
+  `classify=True`, off by default. Kept as an optional dependency group so
+  base scraping never requires an Anthropic API key.
 - **`src/church_stats/cli.py`** — Typer app wiring the scraper and
   repository together (`scan`, `list`, `show`).
 
@@ -78,6 +88,9 @@ mechanism:
   version bump.
 - Propose schema changes as a GitHub issue using the "Schema change" issue
   template before making them, since the schema is shared, persisted data.
+  This includes the `MessagingTheme` taxonomy in
+  `classifier/themes.py` — it's a closed set (not freeform text) so it stays
+  useful for aggregate analysis, and edits to it are schema changes too.
 
 ### Extraction philosophy
 

@@ -55,6 +55,30 @@ class SocialLinks(BaseModel):
     other: dict[str, HttpUrl] = Field(default_factory=dict)
 
 
+MessagingTheme = Literal[
+    "community_belonging",
+    "spiritual_encounter",
+    "biblical_teaching",
+    "practical_relevance",
+    "outreach_service",
+    "traditional_reverence",
+    "casual_accessible",
+    "family_kids",
+    "personal_growth",
+    "other_unclear",
+]
+
+
+class MessagingClassification(BaseModel):
+    """A church's primary outreach message, classified from scraped page text."""
+
+    theme: MessagingTheme
+    confidence: float
+    evidence: str
+    model: str
+    classified_at: datetime
+
+
 class ChurchRecord(BaseModel):
     """A single church's data. Extra fields are allowed for schema flexibility."""
 
@@ -75,6 +99,7 @@ class ChurchRecord(BaseModel):
     social_links: SocialLinks = Field(default_factory=SocialLinks)
     tags: list[str] = Field(default_factory=list)
     sources: list[SourceRecord] = Field(default_factory=list)
+    messaging: MessagingClassification | None = None
     created_at: datetime
     updated_at: datetime
     notes: str | None = None

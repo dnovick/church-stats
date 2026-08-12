@@ -22,6 +22,11 @@ def test_extract_from_rich_page(fixtures_dir: Path) -> None:
     assert data.social_links["instagram"] == "https://www.instagram.com/gracecommunity"
     assert data.social_links["youtube"] == "https://www.youtube.com/gracecommunity"
 
+    assert "Grace Community Church" in data.page_text
+    assert "Join us Sundays!" in data.page_text
+    # Footer boilerplate is stripped out of the classifier-facing text.
+    assert "Facebook" not in data.page_text
+
 
 def test_extract_from_minimal_page_leaves_fields_unset(fixtures_dir: Path) -> None:
     html = (fixtures_dir / "minimal.html").read_text(encoding="utf-8")
