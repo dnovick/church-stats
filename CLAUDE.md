@@ -40,6 +40,8 @@ church-stats scan <url> --classify   # also classify outreach messaging (needs t
 church-stats scan-batch urls.txt     # scan many URLs concurrently; failures don't abort the batch
 church-stats list
 church-stats show <church-id>
+church-stats duplicates              # flag likely-duplicate records for review
+church-stats merge <keep-id> <drop-id>   # combine two records for the same church, delete drop-id
 ```
 
 All tool configuration (mypy, flake8, black, isort, pytest, build backend)
@@ -59,6 +61,17 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
 - **`src/church_stats/storage.py`** — `ChurchRepository`: one JSON file per
   church under `data/churches/<id>.json`, id derived from the site's domain
   via `slugify`. Records are committed to git as they accumulate.
+  `ChurchRepository.merge(existing, incoming)` merges a freshly scraped
+  record into a stored one field-by-field (prefer non-empty `incoming`,
+  else `existing`) so a re-scan can't erase manually-added fields or
+  temporarily-missing scrape data; `scan`/`scan-batch` call it automatically
+  when a record with the same id already exists. `delete()` removes a
+  record (used when merging two duplicate records into one).
+- **`src/church_stats/dedupe.py`** — `find_duplicates`: pairwise-compares
+  stored records (similar name via `difflib`, matching phone, or same
+  city/region + a weaker name match) to flag likely duplicates for
+  *user-confirmed* merging (`church-stats duplicates` / `church-stats merge`)
+  — it never merges anything automatically.
 - **`src/church_stats/scraper/`** — `fetch.py` (HTTP via `requests`),
   `extract.py` (heuristic `BeautifulSoup`/JSON-LD extraction into an
   `ExtractedData` dataclass), `pipeline.py` (`scan_url`: fetch → extract →

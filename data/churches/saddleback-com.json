@@ -32,9 +32,15 @@
       "url": "https://www.saddleback.com/",
       "fetched_at": "2026-08-12T02:30:52.589162Z",
       "method": "scraped"
+    },
+    {
+      "url": "https://www.saddleback.com/",
+      "fetched_at": "2026-08-12T04:13:04.942909Z",
+      "method": "scraped"
     }
   ],
+  "messaging": null,
   "created_at": "2026-08-12T02:30:52.589162Z",
-  "updated_at": "2026-08-12T02:30:52.589162Z",
+  "updated_at": "2026-08-12T04:13:04.942909Z",
   "notes": null
 }

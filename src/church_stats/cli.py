@@ -9,6 +9,7 @@ from typing import Annotated
 
 import typer
 
+from church_stats.dedupe import find_duplicates
 from church_stats.models import ChurchRecord
 from church_stats.scraper.pipeline import scan_url
 from church_stats.storage import ChurchNotFoundError, ChurchRepository
@@ -20,6 +21,23 @@ DEFAULT_DATA_DIR = Path("data/churches")
 
 def _repository() -> ChurchRepository:
     return ChurchRepository(DEFAULT_DATA_DIR)
+
+
+def _merge_if_exists(repo: ChurchRepository, record: ChurchRecord) -> ChurchRecord:
+    """Merge into any existing record with the same id, so a re-scan can't
+    silently overwrite manually-added fields or fields the new scrape
+    happened to miss."""
+    if repo.exists(record.id):
+        return repo.merge(repo.load(record.id), record)
+    return record
+
+
+def _load_or_exit(repo: ChurchRepository, church_id: str) -> ChurchRecord:
+    try:
+        return repo.load(church_id)
+    except ChurchNotFoundError:
+        typer.echo(f"No church found with id {church_id!r}", err=True)
+        raise typer.Exit(code=1) from None
 
 
 @app.command()
@@ -41,7 +59,10 @@ def scan(
     """Scan a church's website and print (and optionally save) the resulting record.
 
     The record id is derived from the site's domain, so re-scanning the same
-    site overwrites its existing record rather than creating a duplicate.
+    site merges into its existing record (see `church-stats merge` for
+    combining records for the same church found at different URLs) rather
+    than overwriting it wholesale -- manually-added fields and anything the
+    new scrape didn't find are preserved.
     """
     repo = _repository()
     try:
@@ -56,11 +77,14 @@ def scan(
             raise
         typer.echo(f"Scan failed: {exc}", err=True)
         raise typer.Exit(code=1) from None
-    typer.echo(record.model_dump_json(indent=2))
 
     if save:
+        record = _merge_if_exists(repo, record)
         path = repo.save(record)
+        typer.echo(record.model_dump_json(indent=2))
         typer.echo(f"Saved to {path}", err=True)
+    else:
+        typer.echo(record.model_dump_json(indent=2))
 
 
 def _read_urls(path: Path) -> list[str]:
@@ -107,7 +131,8 @@ def scan_batch(
 
     Failures (network errors, bad URLs, etc.) are reported per-URL and don't
     abort the rest of the batch. Each record's id is derived from its site's
-    domain, so re-scanning a URL already in the store overwrites that record.
+    domain, so re-scanning a URL already in the store merges into the
+    existing record rather than overwriting it wholesale.
     """
     if concurrency < 1:
         typer.echo("--concurrency must be at least 1", err=True)
@@ -150,6 +175,7 @@ def scan_batch(
                 failed.append((url, error or "unknown error"))
                 continue
             if save:
+                record = _merge_if_exists(repo, record)
                 repo.save(record)
             typer.echo(f"OK      {url} -> {record.id}")
             succeeded.append(url)
@@ -175,12 +201,73 @@ def list_churches() -> None:
 def show(church_id: Annotated[str, typer.Argument(help="Id of a stored church record.")]) -> None:
     """Print one stored church record as JSON."""
     repo = _repository()
-    try:
-        record = repo.load(church_id)
-    except ChurchNotFoundError:
-        typer.echo(f"No church found with id {church_id!r}", err=True)
-        raise typer.Exit(code=1) from None
+    record = _load_or_exit(repo, church_id)
     typer.echo(record.model_dump_json(indent=2))
+
+
+@app.command()
+def duplicates() -> None:
+    """Scan all stored churches for likely duplicates (by name/phone/address).
+
+    This only flags candidate pairs for review -- it never merges anything
+    on its own. Use `church-stats merge <keep-id> <drop-id>` on a pair once
+    you've confirmed they're the same church.
+    """
+    repo = _repository()
+    candidates = find_duplicates(list(repo.all()))
+
+    if not candidates:
+        typer.echo("No likely duplicates found.")
+        return
+
+    for candidate in candidates:
+        typer.echo(f"{candidate.first_id}  <->  {candidate.second_id}")
+        for reason in candidate.reasons:
+            typer.echo(f"  - {reason}")
+
+    typer.echo("")
+    typer.echo(
+        f"{len(candidates)} likely duplicate pair(s). Review and run "
+        "`church-stats merge <keep-id> <drop-id>` to combine a pair."
+    )
+
+
+@app.command(name="merge")
+def merge_command(
+    keep_id: Annotated[
+        str, typer.Argument(help="Id of the record to keep -- it wins on conflicting fields.")
+    ],
+    drop_id: Annotated[
+        str, typer.Argument(help="Id of the duplicate record to merge in, then delete.")
+    ],
+    yes: Annotated[bool, typer.Option("--yes", help="Skip the confirmation prompt.")] = False,
+) -> None:
+    """Merge two records that represent the same church, keeping `keep_id`.
+
+    Fields already set on `keep_id` win; `drop_id` only fills in fields
+    `keep_id` is missing. `drop_id`'s record is deleted once merged.
+    """
+    repo = _repository()
+    keep_record = _load_or_exit(repo, keep_id)
+    drop_record = _load_or_exit(repo, drop_id)
+
+    if not yes:
+        typer.confirm(
+            f"Merge {drop_id!r} ({drop_record.name!r}) into {keep_id!r} ({keep_record.name!r})? "
+            f"This deletes {drop_id!r}'s record.",
+            abort=True,
+        )
+
+    merged = repo.merge(existing=drop_record, incoming=keep_record)
+    merged = merged.model_copy(
+        update={
+            "id": keep_record.id,
+            "created_at": min(keep_record.created_at, drop_record.created_at),
+        }
+    )
+    repo.save(merged)
+    repo.delete(drop_id)
+    typer.echo(f"Merged {drop_id!r} into {keep_id!r}.")
 
 
 if __name__ == "__main__":

@@ -5,8 +5,11 @@ from __future__ import annotations
 import re
 from collections.abc import Iterator
 from pathlib import Path
+from typing import TypeVar
 
-from church_stats.models import ChurchRecord
+from church_stats.models import Address, ChurchRecord, SocialLinks
+
+T = TypeVar("T")
 
 
 def slugify(text: str) -> str:
@@ -16,6 +19,37 @@ def slugify(text: str) -> str:
     slug = re.sub(r"^www\.", "", slug)
     slug = re.sub(r"[^a-z0-9]+", "-", slug)
     return slug.strip("-")
+
+
+def _prefer_non_empty(existing: T, incoming: T) -> T:
+    """Prefer ``incoming`` unless it's ``None`` or an empty string."""
+    if incoming is None:
+        return existing
+    if isinstance(incoming, str) and incoming == "":
+        return existing
+    return incoming
+
+
+def _merge_address(existing: Address, incoming: Address) -> Address:
+    return Address(
+        street=_prefer_non_empty(existing.street, incoming.street),
+        city=_prefer_non_empty(existing.city, incoming.city),
+        region=_prefer_non_empty(existing.region, incoming.region),
+        postal_code=_prefer_non_empty(existing.postal_code, incoming.postal_code),
+        country=_prefer_non_empty(existing.country, incoming.country),
+        latitude=_prefer_non_empty(existing.latitude, incoming.latitude),
+        longitude=_prefer_non_empty(existing.longitude, incoming.longitude),
+    )
+
+
+def _merge_social_links(existing: SocialLinks, incoming: SocialLinks) -> SocialLinks:
+    return SocialLinks(
+        facebook=_prefer_non_empty(existing.facebook, incoming.facebook),
+        instagram=_prefer_non_empty(existing.instagram, incoming.instagram),
+        youtube=_prefer_non_empty(existing.youtube, incoming.youtube),
+        x=_prefer_non_empty(existing.x, incoming.x),
+        other={**existing.other, **incoming.other},
+    )
 
 
 class ChurchNotFoundError(KeyError):
@@ -54,6 +88,38 @@ class ChurchRepository:
         if not path.is_file():
             raise ChurchNotFoundError(church_id)
         return ChurchRecord.model_validate_json(path.read_text(encoding="utf-8"))
+
+    def delete(self, church_id: str) -> None:
+        path = self._path_for(church_id)
+        if not path.is_file():
+            raise ChurchNotFoundError(church_id)
+        path.unlink()
+
+    def merge(self, existing: ChurchRecord, incoming: ChurchRecord) -> ChurchRecord:
+        """Merge ``incoming`` into ``existing``, returning the merged record.
+
+        Prefers ``incoming`` values only where they're non-empty, so this
+        can't silently erase manually-added fields (denomination, notes,
+        tags, leaders, ...) or data a site temporarily stopped exposing --
+        those come along for free via ``model_copy`` since they're never in
+        ``update``. Sources accumulate; service times are replaced wholesale
+        when the new scan found any, so stale hours don't linger next to
+        fresh ones.
+        """
+        update = {
+            "name": _prefer_non_empty(existing.name, incoming.name),
+            "website": _prefer_non_empty(existing.website, incoming.website),
+            "description": _prefer_non_empty(existing.description, incoming.description),
+            "address": _merge_address(existing.address, incoming.address),
+            "phone": _prefer_non_empty(existing.phone, incoming.phone),
+            "email": _prefer_non_empty(existing.email, incoming.email),
+            "service_times": incoming.service_times or existing.service_times,
+            "social_links": _merge_social_links(existing.social_links, incoming.social_links),
+            "sources": existing.sources + incoming.sources,
+            "messaging": incoming.messaging or existing.messaging,
+            "updated_at": incoming.updated_at,
+        }
+        return existing.model_copy(update=update)
 
     def list_ids(self) -> list[str]:
         if not self.data_dir.is_dir():
