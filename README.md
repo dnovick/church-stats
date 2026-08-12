@@ -7,7 +7,10 @@ Given a church's website URL, `church-stats` scans the site and extracts
 structured information (name, address, contact info, service times, social
 links, ...) into a local JSON store — one file per church under
 `data/churches/`. The schema is intentionally flexible and evolves over time;
-see `CLAUDE.md` for the schema-evolution convention.
+see `CLAUDE.md` for the schema-evolution convention. Re-scanning a URL
+already in the store merges the fresh scrape into the existing record
+instead of overwriting it, so manually-added fields (notes, tags,
+denomination, ...) survive re-scans — see "Duplicates and merging" below.
 
 ## Install
 
@@ -40,6 +43,22 @@ church-stats scan-batch urls.txt
 reports failures per-URL instead of aborting the whole run — see the
 `Scanned N: X succeeded, Y failed` summary at the end. Use `--delay` to
 space out requests if you want to be gentler on the sites you're scanning.
+
+### Duplicates and merging
+
+The same church can end up stored under two different ids if it's reachable
+at more than one domain/URL. `church-stats duplicates` flags likely-duplicate
+pairs (by similar name, matching phone number, or same city/region + a
+weaker name match) for you to review — it never merges anything on its own:
+
+```bash
+church-stats duplicates
+
+church-stats merge <keep-id> <drop-id>   # combine and delete drop-id's record
+```
+
+Fields already set on `<keep-id>` win; `<drop-id>` only fills in fields
+`<keep-id>` is missing. Pass `--yes` to skip the confirmation prompt.
 
 ### Classifying outreach messaging (optional)
 
