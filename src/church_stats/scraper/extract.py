@@ -31,6 +31,49 @@ _CHURCH_JSONLD_TYPES = {"church", "localbusiness", "place", "religiousorganizati
 _BOILERPLATE_TAGS = ("nav", "footer", "header", "script", "style")
 _PAGE_TEXT_MAX_CHARS = 6000
 
+_DAY_ALIASES: dict[str, str] = {
+    "sun": "Sunday",
+    "sunday": "Sunday",
+    "sundays": "Sunday",
+    "mon": "Monday",
+    "monday": "Monday",
+    "mondays": "Monday",
+    "tue": "Tuesday",
+    "tues": "Tuesday",
+    "tuesday": "Tuesday",
+    "tuesdays": "Tuesday",
+    "wed": "Wednesday",
+    "weds": "Wednesday",
+    "wednesday": "Wednesday",
+    "wednesdays": "Wednesday",
+    "thu": "Thursday",
+    "thur": "Thursday",
+    "thurs": "Thursday",
+    "thursday": "Thursday",
+    "thursdays": "Thursday",
+    "fri": "Friday",
+    "friday": "Friday",
+    "fridays": "Friday",
+    "sat": "Saturday",
+    "saturday": "Saturday",
+    "saturdays": "Saturday",
+}
+_DAY_RE = re.compile(
+    r"\b(" + "|".join(sorted(_DAY_ALIASES, key=len, reverse=True)) + r")\b", re.IGNORECASE
+)
+_TIME_TOKEN_RE = re.compile(
+    r"\b(?P<hour>\d{1,2})(?::(?P<minute>[0-5]\d))?\s*(?P<meridiem>[ap]\.?m\.?)?", re.IGNORECASE
+)
+_LANGUAGE_RE = re.compile(r"\(([^)]+)\)")
+
+_SERVICE_TIME_HEADING_RE = re.compile(
+    r"service\s*times?|when\s+we\s+meet|worship\s*times?|meeting\s*times?"
+    r"|weekend\s*services?|plan\s+your\s+visit",
+    re.IGNORECASE,
+)
+_HEADING_TAGS = ("h1", "h2", "h3", "h4", "h5", "h6", "strong", "b")
+_MAX_SERVICE_TIME_CANDIDATES = 5
+
 
 @dataclass
 class ExtractedServiceTime:
@@ -38,6 +81,14 @@ class ExtractedServiceTime:
     day_of_week: str | None = None
     time: str | None = None
     language: str | None = None
+    raw_text: str | None = None
+
+
+@dataclass
+class _TimeToken:
+    hour: int
+    minute: int
+    meridiem: str | None
 
 
 @dataclass
@@ -190,6 +241,111 @@ def _service_times_from_spec(spec: dict[str, object]) -> list[ExtractedServiceTi
     ]
 
 
+def _to_24h(hour: int, minute: int, meridiem: str) -> str:
+    normalized = meridiem.lower().replace(".", "")
+    if normalized.startswith("p") and hour != 12:
+        hour += 12
+    elif normalized.startswith("a") and hour == 12:
+        hour = 0
+    return f"{hour:02d}:{minute:02d}"
+
+
+def _resolve_times(segment: str) -> list[str]:
+    tokens: list[_TimeToken] = []
+    for match in _TIME_TOKEN_RE.finditer(segment):
+        minute_group = match.group("minute")
+        meridiem = match.group("meridiem")
+        if minute_group is None and meridiem is None:
+            continue  # too ambiguous to be a time (e.g. a bare number)
+        hour = int(match.group("hour"))
+        if not 1 <= hour <= 12:
+            continue
+        tokens.append(_TimeToken(hour=hour, minute=int(minute_group or "0"), meridiem=meridiem))
+
+    # Forward-fill a missing meridiem from a later token in the same segment,
+    # e.g. "9:00 & 11:00 AM" means both services are in the morning.
+    last_meridiem: str | None = None
+    for token in reversed(tokens):
+        if token.meridiem is not None:
+            last_meridiem = token.meridiem
+        elif last_meridiem is not None:
+            token.meridiem = last_meridiem
+
+    return [_to_24h(token.hour, token.minute, token.meridiem) for token in tokens if token.meridiem]
+
+
+def _parse_service_times_from_text(text: str) -> list[ExtractedServiceTime]:
+    """Parse free text like "Sundays 9am & 11am" into structured service times.
+
+    A day mention with no confidently-parseable time still produces an
+    entry (day set, time left ``None``) so the original text survives in
+    ``raw_text`` -- but only when *some* day in the same text resolved a
+    real time. A block with no resolved times at all is too weak a signal
+    (day names show up in plenty of unrelated page content) and is
+    discarded entirely rather than adding noisy, timeless entries.
+    """
+    day_matches = list(_DAY_RE.finditer(text))
+    candidates: list[ExtractedServiceTime] = []
+
+    for index, day_match in enumerate(day_matches):
+        segment_end = day_matches[index + 1].start() if index + 1 < len(day_matches) else len(text)
+        segment = text[day_match.start() : segment_end].strip()
+        day = _DAY_ALIASES[day_match.group(0).lower()]
+
+        language_match = _LANGUAGE_RE.search(segment)
+        language = language_match.group(1).strip() if language_match else None
+
+        times = _resolve_times(segment)
+        if not times:
+            candidates.append(
+                ExtractedServiceTime(day_of_week=day, language=language, raw_text=segment)
+            )
+            continue
+
+        for time in times:
+            candidates.append(
+                ExtractedServiceTime(
+                    day_of_week=day, time=time, language=language, raw_text=segment
+                )
+            )
+
+    if not any(c.time for c in candidates):
+        return []
+    return candidates
+
+
+def _find_service_time_candidates(soup: BeautifulSoup) -> list[str]:
+    """Find text blocks likely to describe service times: a heading whose
+    text matches common phrasing ("Service Times", "When We Meet", ...)
+    plus its immediately following siblings."""
+    candidates: list[str] = []
+    seen: set[str] = set()
+
+    for heading in soup.find_all(_HEADING_TAGS):
+        if not isinstance(heading, Tag):
+            continue
+        heading_text = heading.get_text(" ", strip=True)
+        if not _SERVICE_TIME_HEADING_RE.search(heading_text):
+            continue
+
+        parts = [heading_text]
+        for sibling in heading.find_next_siblings(limit=3):
+            if isinstance(sibling, Tag):
+                sibling_text = sibling.get_text(" ", strip=True)
+                if sibling_text:
+                    parts.append(sibling_text)
+
+        candidate = " ".join(parts).strip()
+        if candidate and candidate not in seen:
+            seen.add(candidate)
+            candidates.append(candidate)
+
+        if len(candidates) >= _MAX_SERVICE_TIME_CANDIDATES:
+            break
+
+    return candidates
+
+
 def _extract_page_text(html: str) -> str:
     """Pull representative page text for downstream classification.
 
@@ -224,6 +380,14 @@ def extract(html: str) -> ExtractedData:
         if _jsonld_type_matches(entry):
             _apply_jsonld(entry, data)
     data.service_times = _dedupe_service_times(data.service_times)
+
+    if not data.service_times:
+        # JSON-LD is the trusted source (see module docstring); only fall
+        # back to parsing free text near a "service times"-style heading
+        # when the page didn't publish any structured hours.
+        for candidate in _find_service_time_candidates(soup):
+            data.service_times.extend(_parse_service_times_from_text(candidate))
+        data.service_times = _dedupe_service_times(data.service_times)
 
     phone, email = _extract_contact(soup.get_text(separator=" "))
     data.phone = data.phone or phone

@@ -76,6 +76,16 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
   `extract.py` (heuristic `BeautifulSoup`/JSON-LD extraction into an
   `ExtractedData` dataclass), `pipeline.py` (`scan_url`: fetch → extract →
   build a `ChurchRecord`, without saving it).
+  - Service times: `openingHoursSpecification` in JSON-LD is trusted first.
+    Only when JSON-LD produced none does `extract.py` fall back to free-text
+    parsing — find headings matching "Service Times"/"When We Meet"/etc.
+    (`_find_service_time_candidates`), then parse day/time/language out of
+    that text (`_parse_service_times_from_text`), including forward-filling
+    a shared am/pm marker across a list like "9:00 & 11:00 AM". A block is
+    kept only if *some* day in it resolved a real time — day names alone
+    show up in too much unrelated page content to trust without that
+    signal — and every free-text-derived `ServiceTime` carries the original
+    matched text in `raw_text` (`None` for JSON-LD-derived ones).
 - **`src/church_stats/classifier/`** — optional (`[classify]` extra):
   `themes.py` (the controlled outreach-messaging taxonomy) and
   `messaging.py` (`classify_messaging`: Claude structured outputs, closed-set
@@ -123,6 +133,12 @@ mechanism:
 JSON-LD (`@type: Church`/`LocalBusiness`/etc.) is trusted over meta tags,
 which are trusted over regex sniffing of page text. A field extraction
 should leave the field `None` rather than guess when it isn't confident.
+
+Known limitation: `scan` only fetches the one URL given, so a church whose
+service times live on a separate "Visit"/"Times" page (common) won't be
+found even though the free-text parser could handle the text fine — that's
+a multi-page-crawling gap, not a parsing one. Worth a future issue if it
+turns out to matter a lot in practice.
 
 ## Issue tracking
 

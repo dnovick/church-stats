@@ -73,3 +73,32 @@ def test_extract_merges_multiple_jsonld_entries_and_dedupes_service_times(
     assert data.service_times[0].name == "Sunday Service"
     assert data.service_times[0].day_of_week == "Sunday"
     assert data.service_times[0].time == "10:00"
+    # Structured JSON-LD hours don't need a raw-text fallback.
+    assert data.service_times[0].raw_text is None
+
+
+def test_extract_falls_back_to_free_text_service_times_without_jsonld(
+    fixtures_dir: Path,
+) -> None:
+    html = (fixtures_dir / "free_text_service_times.html").read_text(encoding="utf-8")
+    data = extract(html)
+
+    parsed = {(st.day_of_week, st.time, st.language) for st in data.service_times}
+    assert parsed == {
+        ("Sunday", "09:00", None),
+        ("Sunday", "11:00", None),
+        ("Saturday", "17:00", "Spanish"),
+    }
+    assert all(st.raw_text for st in data.service_times)
+
+
+def test_extract_prefers_jsonld_service_times_over_free_text(fixtures_dir: Path) -> None:
+    # sample_church.html has both JSON-LD (no hours) and free text ("Join us
+    # Sundays!" with no parseable time) -- neither should produce a bogus
+    # service time, and this also confirms the free-text fallback only
+    # engages when JSON-LD found nothing, not whenever JSON-LD is present.
+    html = (fixtures_dir / "graph_and_hours.html").read_text(encoding="utf-8")
+    data = extract(html)
+
+    assert data.service_times
+    assert all(st.raw_text is None for st in data.service_times)

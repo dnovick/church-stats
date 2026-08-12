@@ -44,6 +44,18 @@ reports failures per-URL instead of aborting the whole run — see the
 `Scanned N: X succeeded, Y failed` summary at the end. Use `--delay` to
 space out requests if you want to be gentler on the sites you're scanning.
 
+### Service times
+
+`service_times` is populated from `schema.org` JSON-LD when a site
+publishes it (most reliable), or otherwise parsed from free text near a
+heading like "Service Times" or "When We Meet" — handling things like
+"Sundays 9am & 11am" or "Sun 9:00 / 11:00 AM" (a shared am/pm marker
+applies to the whole list) and an optional `(Language)` hint. A day found
+with no confidently-parseable time is only kept when the same block
+resolved a real time elsewhere, and its original text is preserved in
+`raw_text` for review. This is homepage-only — a church whose times live on
+a separate "Visit" page won't be picked up yet.
+
 ### Duplicates and merging
 
 The same church can end up stored under two different ids if it's reachable

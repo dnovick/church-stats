@@ -44,6 +44,7 @@ def _build_record(url: str, data: ExtractedData, *, fetched_at: datetime) -> Chu
                 day_of_week=service_time.day_of_week,
                 time=service_time.time,
                 language=service_time.language,
+                raw_text=service_time.raw_text,
             )
             for service_time in data.service_times
         ],
