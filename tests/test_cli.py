@@ -16,7 +16,11 @@ runner = CliRunner()
 
 
 def _fake_scan_url(
-    url: str, *, classify: bool = False, classifier_model: str | None = None
+    url: str,
+    *,
+    classify: bool = False,
+    classifier_model: str | None = None,
+    crawl: bool = True,
 ) -> ChurchRecord:
     if "bad" in url:
         raise FetchError(f"could not fetch {url}")
