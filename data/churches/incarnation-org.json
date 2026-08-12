@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "incarnation-org",
+  "name": "Church of the Incarnation",
+  "also_known_as": [],
+  "denomination": "Episcopal",
+  "website": "https://incarnation.org/",
+  "description": "Church of the Incarnation has been a worshipping community in Dallas since 1886. Worshipping in the Great Tradition of the Church, we invite you to join us on Sundays at 9 a.m. and 11:15 a.m. for our contemporary or traditional service or for Evensong at 5 p.m.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "214-521-5101",
+  "email": "info@incarnation.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/IncarnationDFW",
+    "instagram": "https://www.instagram.com/incarnationdfw/",
+    "youtube": null,
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://incarnation.org/",
+      "fetched_at": "2026-08-12T05:26:45.519548Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://incarnation.org/#",
+      "fetched_at": "2026-08-12T05:26:45.597900Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://incarnation.org/about-us/staff/",
+      "fetched_at": "2026-08-12T05:26:45.715264Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.75,
+    "evidence": "\"grow in Christ together, to serve those in need, and to raise up godly leaders in the context of a rooted, vibrant, faith-filled community\" emphasizes shared spiritual journey and community connection, while also mentioning worship tradition and service aspects",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:47.166650Z"
+  },
+  "created_at": "2026-08-12T05:26:45.519548Z",
+  "updated_at": "2026-08-12T05:26:45.519548Z",
+  "notes": null
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "friendshipwest-org",
+  "name": "Friendship-West Baptist Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.friendshipwest.org/",
+  "description": "Friendship-West is a church that  stands to pursue justice, service and equality for all of humankind throughout the city of Dallas, United States and world.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(972) 228-5200",
+  "email": "info@friendshipwest.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/friendshipwest",
+    "instagram": "https://www.instagram.com/friendshipwest/",
+    "youtube": "https://www.youtube.com/friendshipwest",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.friendshipwest.org/",
+      "fetched_at": "2026-08-12T05:26:45.912893Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.friendshipwest.org/message/good-news-for-those-about-to-tap-out",
+      "fetched_at": "2026-08-12T05:26:46.057070Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.friendshipwest.org/our-pastor",
+      "fetched_at": "2026-08-12T05:26:46.176580Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "outreach_service",
+    "confidence": 0.92,
+    "evidence": "Friendship-West stands to pursue justice, service and equality for all of humankind throughout the city of Dallas, United States and world. Below you will find more ways Friendship-West serves the community and ways you can support our work or get involved.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:47.459796Z"
+  },
+  "created_at": "2026-08-12T05:26:45.912893Z",
+  "updated_at": "2026-08-12T05:26:45.912893Z",
+  "notes": null
+}

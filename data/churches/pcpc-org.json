@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "pcpc-org",
+  "name": "Park Cities Presbyterian Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.pcpc.org/",
+  "description": "Park Cities Presbyterian Church in Dallas, TX, exists to extend the transforming presence of the Kingdom of our Lord Jesus Christ in Dallas and to the world.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "214-224-2500",
+  "email": null,
+  "service_times": [
+    {
+      "name": null,
+      "day_of_week": "Sunday",
+      "time": "08:00",
+      "language": null,
+      "raw_text": "Sundays at 8:00, 9:30, & 11:00 a.m."
+    },
+    {
+      "name": null,
+      "day_of_week": "Sunday",
+      "time": "09:30",
+      "language": null,
+      "raw_text": "Sundays at 8:00, 9:30, & 11:00 a.m."
+    },
+    {
+      "name": null,
+      "day_of_week": "Sunday",
+      "time": "11:00",
+      "language": null,
+      "raw_text": "Sundays at 8:00, 9:30, & 11:00 a.m."
+    }
+  ],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/parkcitiespca",
+    "instagram": "https://www.instagram.com/parkcitiespca",
+    "youtube": "https://www.youtube.com/parkcitiespca",
+    "x": "https://x.com/parkcitiespca",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.pcpc.org/",
+      "fetched_at": "2026-08-12T05:26:40.708761Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.pcpc.org/about",
+      "fetched_at": "2026-08-12T05:26:41.044234Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.pcpc.org/about/staff",
+      "fetched_at": "2026-08-12T05:26:41.322959Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.92,
+    "evidence": "Groups and classes at PCPC give you places to grow in Christ alongside others... Wherever you are in life, there's a group where you can belong and be built up in Christ.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:43.190179Z"
+  },
+  "created_at": "2026-08-12T05:26:40.708761Z",
+  "updated_at": "2026-08-12T05:26:40.708761Z",
+  "notes": null
+}

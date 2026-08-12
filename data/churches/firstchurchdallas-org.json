@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "firstchurchdallas-org",
+  "name": "First United Methodist Church, Dallas - Home",
+  "also_known_as": [],
+  "denomination": "United Methodist",
+  "website": "https://www.firstchurchdallas.org/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "214-220-2727",
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/FUMCDal/",
+    "instagram": "https://www.instagram.com/fumcdallas/",
+    "youtube": "https://www.youtube.com/@fumcdallas",
+    "x": "https://x.com/FUMCDallas",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.firstchurchdallas.org/",
+      "fetched_at": "2026-08-12T05:26:40.886176Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.firstchurchdallas.org/staff",
+      "fetched_at": "2026-08-12T05:26:41.365736Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.95,
+    "evidence": "Creating space for belonging, purpose, justice and joy! Welcome to First United Methodist Church, Dallas! We are a United Methodist congregation that welcomes people from many different backgrounds into a community where belonging is found, purpose is lived out, justice is pursued, and joy is shared together.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:42.795951Z"
+  },
+  "created_at": "2026-08-12T05:26:40.886176Z",
+  "updated_at": "2026-08-12T05:26:40.886176Z",
+  "notes": null
+}

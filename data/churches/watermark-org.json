@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "watermark-org",
+  "name": "Bible Church | Dallas, Texas | Watermark Community Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.watermark.org/",
+  "description": "Join us during one of our weekend services, at Watermark Community Church in Dallas, TX. Learn more about our weekend services and midweek ministries!",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "214-361-2275",
+  "email": "info@watermark.org",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/watermarkchurch/",
+    "instagram": "https://www.instagram.com/watermarkchurch/",
+    "youtube": "https://www.youtube.com/user/watermarkchurch",
+    "x": "https://twitter.com/WatermarkChurch",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.watermark.org/",
+      "fetched_at": "2026-08-12T05:26:43.668921Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.watermark.org/team",
+      "fetched_at": "2026-08-12T05:26:44.075895Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.watermark.org/discover-watermark",
+      "fetched_at": "2026-08-12T05:26:44.407409Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "personal_growth",
+    "confidence": 0.75,
+    "evidence": "Abiding in Jesus, we are making disciples together",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:45.777939Z"
+  },
+  "created_at": "2026-08-12T05:26:43.668921Z",
+  "updated_at": "2026-08-12T05:26:43.668921Z",
+  "notes": null
+}

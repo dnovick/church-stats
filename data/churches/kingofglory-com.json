@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "kingofglory-com",
+  "name": "King of Glory Lutheran Church",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://www.kingofglory.com/",
+  "description": "King of Glory Lutheran Church (ELCA) in Dallas Texas welcomes all into the community because God welcomes all, regardless of race or culture, sexual orientation, gender identity, gender expression, or family status.",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/King-of-Glory-Lutheran-Church-241958872507392/?fref=ts",
+    "instagram": "https://www.instagram.com/kogdallas/",
+    "youtube": "https://www.youtube.com/channel/UCHMzPnyb8_deMzTUg_m-3sw/",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.kingofglory.com/",
+      "fetched_at": "2026-08-12T05:26:45.765810Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.kingofglory.com/about/",
+      "fetched_at": "2026-08-12T05:26:46.006466Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.kingofglory.com/about/staff-and-leadership/",
+      "fetched_at": "2026-08-12T05:26:46.839231Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.75,
+    "evidence": "Multiple invitations to serve, volunteer, and participate together: 'Serve during worship,' 'Volunteer roles for SERVe Opportunities,' and 'Join us as we strive to be generous in service and giving' emphasize connection and shared community involvement.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:26:48.305665Z"
+  },
+  "created_at": "2026-08-12T05:26:45.765810Z",
+  "updated_at": "2026-08-12T05:26:45.765810Z",
+  "notes": null
+}
