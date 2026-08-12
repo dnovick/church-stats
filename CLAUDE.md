@@ -67,7 +67,14 @@ warnings with unjustified `# type: ignore` / `# noqa` comments.
   `messaging.py` (`classify_messaging`: Claude structured outputs, closed-set
   theme + confidence + evidence). Wired into `pipeline.scan_url` via
   `classify=True`, off by default. Kept as an optional dependency group so
-  base scraping never requires an Anthropic API key.
+  base scraping never requires an Anthropic API key. Credentials come from
+  `ANTHROPIC_API_KEY` (shell env var or a gitignored project-root `.env`,
+  loaded via `python-dotenv` — see `.env.example`); deliberately **not**
+  from an `ant auth login` profile, since that credential type is meant for
+  the Anthropic CLI/SDK generally, and mixing it with Claude Code's own
+  credential resolution in the same shell risks Claude Code itself picking
+  up an unintended auth source. A `.env` in the project root only affects
+  `church-stats`'s own process — it's never read by Claude Code.
 - **`src/church_stats/cli.py`** — Typer app wiring the scraper and
   repository together (`scan`, `list`, `show`).
 

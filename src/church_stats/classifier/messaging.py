@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime, timezone
 
 from anthropic import Anthropic
+from dotenv import load_dotenv
 from pydantic import BaseModel
 
 from church_stats.classifier.themes import THEME_DESCRIPTIONS
@@ -39,9 +40,13 @@ def classify_messaging(
 
     Uses Claude structured outputs so the response is guaranteed to be one of
     the closed-set theme values. Credentials are resolved by the Anthropic
-    SDK's normal mechanism (``ANTHROPIC_API_KEY`` env var or an ``ant auth
-    login`` profile) -- nothing project-specific to configure.
+    SDK's normal mechanism (``ANTHROPIC_API_KEY`` env var, a ``.env`` file in
+    the project directory, or an ``ant auth login`` profile) -- nothing else
+    to configure. ``load_dotenv()`` only sets variables in this process, and
+    only if they aren't already set, so it never affects a shell's own
+    environment or an already-running tool like Claude Code.
     """
+    load_dotenv()
     client = Anthropic()
     response = client.messages.parse(
         model=model,

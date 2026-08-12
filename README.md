@@ -43,10 +43,16 @@ since it's an extra paid API call per scan:
 
 ```bash
 pip install -e '.[classify]'
+cp .env.example .env   # then edit .env and set ANTHROPIC_API_KEY
 
-# Uses ANTHROPIC_API_KEY (or an `ant auth login` profile) for credentials
 church-stats scan https://example-church.org --classify
 ```
+
+Credentials come from `ANTHROPIC_API_KEY` — either already set in your shell,
+or in a gitignored `.env` file in the project root (see `.env.example`). The
+`.env` file is only read by `church-stats` itself and never touches your
+shell environment, so it's safe to use even if you also use Claude Code
+(which reads its own subscription credentials separately) in this directory.
 
 ## Development
 
