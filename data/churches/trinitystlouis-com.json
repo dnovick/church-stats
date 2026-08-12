@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "id": "trinitystlouis-com",
+  "name": "Trinity + Soulard - An open and caring, radically Christ-centered, deeply sacramental and sometimes eclectic ministry in the heart of Soulard",
+  "also_known_as": [],
+  "denomination": null,
+  "website": "https://trinitystlouis.com/",
+  "description": "[vc_column column_padding=\"no-extra-padding\" column_padding_tablet=\"inherit\" column_padding_phone=\"inherit\" column_padding_position=\"all\" column_element_direction_desktop=\"default\" column_element_spacing=\"default\" centered_text=\"true\" desktop_text_alignment=\"default\" tablet_text_alignment=\"default\" phone_text_alignment=\"default\" background_color_opacity=\"1\" background_hover_color_opacity=\"1\" column_backdrop_filter=\"none\" column_shadow=\"none\" column_border_radius=\"none\" column_link_target=\"_self\" column_position=\"default\" gradient_direction=\"left_to_right\" overlay_strength=\"0.3\" width=\"1/1\" tablet_width_inherit=\"default\" animation_type=\"default\" bg_image_animation=\"none\" border_type=\"simple\"",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": "pastorhatcher@trinitystlouis.com",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/TrinitySoulard/",
+    "instagram": null,
+    "youtube": "https://youtube.com/@TrinitySoulard",
+    "x": "https://twitter.com/trinitysoulard",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://trinitystlouis.com/",
+      "fetched_at": "2026-08-12T05:30:24.832787Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://trinitystlouis.com/our-ministry-team/",
+      "fetched_at": "2026-08-12T05:30:25.839406Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://trinitystlouis.com/community-care/",
+      "fetched_at": "2026-08-12T05:30:26.926311Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.92,
+    "evidence": "\"a loving, Christ-centered community actively reaching out to all people\" and \"You don't have to pretend here. You can be your whole and authentic self\" emphasize authentic connection and belonging rather than doctrine or programs alone.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:28.702798Z"
+  },
+  "created_at": "2026-08-12T05:30:24.832787Z",
+  "updated_at": "2026-08-12T05:30:24.832787Z",
+  "notes": null
+}

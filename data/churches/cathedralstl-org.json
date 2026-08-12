@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "id": "cathedralstl-org",
+  "name": "The Cathedral Basilica of St. Louis",
+  "also_known_as": [],
+  "denomination": "Roman Catholic",
+  "website": "https://www.cathedralstl.org/",
+  "description": "The Cathedral Basilica is a manifestation of the Church's mission to invite all who visit here to open their hearts to welcome Jesus. We look forward to welcoming you!",
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": null,
+  "email": null,
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/cathedralstlmo",
+    "instagram": "https://www.instagram.com/cathedralbasilicaofstl",
+    "youtube": "https://www.youtube.com/UCLW4GRozC32raWkY3WDW8Dg",
+    "x": "https://www.twitter.com/cathedralstlmo",
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://www.cathedralstl.org/",
+      "fetched_at": "2026-08-12T05:30:24.105416Z",
+      "method": "scraped"
+    },
+    {
+      "url": "https://www.cathedralstl.org/about-basilica/hours-and-staff",
+      "fetched_at": "2026-08-12T05:30:24.339255Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "traditional_reverence",
+    "confidence": 0.92,
+    "evidence": "The site emphasizes liturgical elements (Mass times, Eucharistic Adoration, Confession Times), formal cathedral designation, and traditional Catholic practices like vigil candles and prayers to Mary, with no mention of casual atmosphere or contemporary messaging.",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:25.710983Z"
+  },
+  "created_at": "2026-08-12T05:30:24.105416Z",
+  "updated_at": "2026-08-12T05:30:24.105416Z",
+  "notes": null
+}

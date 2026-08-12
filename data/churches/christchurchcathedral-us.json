@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "id": "christchurchcathedral-us",
+  "name": "Christ Church Cathedral",
+  "also_known_as": [],
+  "denomination": "Episcopal",
+  "website": "https://christchurchcathedral.us/",
+  "description": null,
+  "address": {
+    "street": null,
+    "city": null,
+    "region": null,
+    "postal_code": null,
+    "country": null,
+    "latitude": null,
+    "longitude": null
+  },
+  "phone": "(314) 255-1641",
+  "email": "administrator@christchurchcathedral.us",
+  "service_times": [],
+  "leaders": [],
+  "social_links": {
+    "facebook": "https://www.facebook.com/cccathedralstl/",
+    "instagram": null,
+    "youtube": "https://www.youtube.com/channel/UCEXtfvXUHeReh_K5rQiusPg",
+    "x": null,
+    "other": {}
+  },
+  "tags": [],
+  "sources": [
+    {
+      "url": "https://christchurchcathedral.us/",
+      "fetched_at": "2026-08-12T05:30:26.862264Z",
+      "method": "scraped"
+    }
+  ],
+  "messaging": {
+    "theme": "community_belonging",
+    "confidence": 0.85,
+    "evidence": "BE HERE, BE YOU, BE LOVED - we mean you are most welcome among us; joyous welcoming community of faith that is open, exploring, and embracing; finding questions we can seek to answer together",
+    "model": "claude-haiku-4-5",
+    "classified_at": "2026-08-12T05:30:28.803530Z"
+  },
+  "created_at": "2026-08-12T05:30:26.862264Z",
+  "updated_at": "2026-08-12T05:30:26.862264Z",
+  "notes": null
+}
