@@ -23,6 +23,17 @@ def _repository() -> ChurchRepository:
 def scan(
     url: Annotated[str, typer.Argument(help="URL of the church's website to scan.")],
     save: Annotated[bool, typer.Option(help="Save the resulting record to the data store.")] = True,
+    classify: Annotated[
+        bool,
+        typer.Option(
+            help="Classify the church's outreach messaging via the Claude API "
+            r"(requires \[classify] extra and Anthropic credentials)."
+        ),
+    ] = False,
+    classifier_model: Annotated[
+        str | None,
+        typer.Option(help="Model to use for --classify. Defaults to a low-cost model."),
+    ] = None,
 ) -> None:
     """Scan a church's website and print (and optionally save) the resulting record.
 
@@ -30,7 +41,18 @@ def scan(
     site overwrites its existing record rather than creating a duplicate.
     """
     repo = _repository()
-    record = scan_url(url)
+    try:
+        record = scan_url(url, classify=classify, classifier_model=classifier_model)
+    except ImportError:
+        typer.echo(
+            "--classify requires the 'classify' extra: pip install -e '.[classify]'", err=True
+        )
+        raise typer.Exit(code=1) from None
+    except Exception as exc:
+        if not classify:
+            raise
+        typer.echo(f"Scan failed: {exc}", err=True)
+        raise typer.Exit(code=1) from None
     typer.echo(record.model_dump_json(indent=2))
 
     if save:

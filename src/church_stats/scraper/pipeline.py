@@ -59,12 +59,30 @@ def _build_record(url: str, data: ExtractedData, *, fetched_at: datetime) -> Chu
     )
 
 
-def scan_url(url: str) -> ChurchRecord:
+def scan_url(
+    url: str, *, classify: bool = False, classifier_model: str | None = None
+) -> ChurchRecord:
     """Fetch ``url``, extract best-effort church data, and build a ``ChurchRecord``.
 
     Does not save the record; the caller decides whether/where to persist it.
+    Set ``classify=True`` to also classify the page's outreach messaging via
+    the Claude API (requires the ``classify`` optional dependency group and
+    Anthropic credentials).
     """
     html = fetch_page(url)
     data = extract(html)
     fetched_at = datetime.now(timezone.utc)
-    return _build_record(url, data, fetched_at=fetched_at)
+    record = _build_record(url, data, fetched_at=fetched_at)
+
+    if classify:
+        from church_stats.classifier.messaging import (
+            DEFAULT_CLASSIFIER_MODEL,
+            classify_messaging,
+        )
+
+        messaging = classify_messaging(
+            data.page_text, model=classifier_model or DEFAULT_CLASSIFIER_MODEL
+        )
+        record = record.model_copy(update={"messaging": messaging})
+
+    return record

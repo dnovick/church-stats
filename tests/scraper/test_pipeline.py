@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from pathlib import Path
 
 import pytest
 
+from church_stats.classifier import messaging as messaging_module
+from church_stats.models import MessagingClassification
 from church_stats.scraper import pipeline
 
 
@@ -34,3 +37,25 @@ def test_scan_url_maps_extracted_service_times(
 
     assert len(record.service_times) == 3
     assert {st.day_of_week for st in record.service_times} == {"Sunday", "Wednesday"}
+
+
+def test_scan_url_with_classify_attaches_messaging(
+    fixtures_dir: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    html = (fixtures_dir / "sample_church.html").read_text(encoding="utf-8")
+    monkeypatch.setattr(pipeline, "fetch_page", lambda url: html)
+
+    fake_classification = MessagingClassification(
+        theme="spiritual_encounter",
+        confidence=0.8,
+        evidence="join us for worship",
+        model="claude-haiku-4-5",
+        classified_at=datetime(2026, 1, 1, tzinfo=timezone.utc),
+    )
+    monkeypatch.setattr(
+        messaging_module, "classify_messaging", lambda text, model: fake_classification
+    )
+
+    record = pipeline.scan_url("https://www.gracecommunity.example/", classify=True)
+
+    assert record.messaging == fake_classification

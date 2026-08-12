@@ -33,6 +33,21 @@ church-stats list
 church-stats show example-church-org
 ```
 
+### Classifying outreach messaging (optional)
+
+`church-stats scan --classify` uses the Claude API to classify a church's
+homepage into a controlled taxonomy of outreach-messaging themes (e.g.
+community-focused vs. spiritual-experience-focused) — see
+`src/church_stats/classifier/themes.py` for the full list. This is opt-in
+since it's an extra paid API call per scan:
+
+```bash
+pip install -e '.[classify]'
+
+# Uses ANTHROPIC_API_KEY (or an `ant auth login` profile) for credentials
+church-stats scan https://example-church.org --classify
+```
+
 ## Development
 
 ```bash
