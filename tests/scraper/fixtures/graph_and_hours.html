@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>River City Church</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "name": "River City Church",
+        "telephone": "(555) 987-6543",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "500 River Rd",
+          "addressLocality": "Rivertown",
+          "addressRegion": "TX",
+          "postalCode": "75001",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/Sunday",
+            "opens": "09:00",
+            "name": "Sunday Worship"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "https://schema.org/Sunday",
+            "opens": "11:00",
+            "name": "Second Service"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["https://schema.org/Wednesday"],
+            "opens": "19:00",
+            "name": "Midweek Bible Study"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <p>Welcome to River City Church.</p>
+</body>
+</html>

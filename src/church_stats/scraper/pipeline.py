@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 from pydantic import HttpUrl
 
-from church_stats.models import Address, ChurchRecord, SocialLinks, SourceRecord
+from church_stats.models import Address, ChurchRecord, ServiceTime, SocialLinks, SourceRecord
 from church_stats.scraper.extract import ExtractedData, extract
 from church_stats.scraper.fetch import fetch_page
 from church_stats.storage import slugify
@@ -38,6 +38,15 @@ def _build_record(url: str, data: ExtractedData, *, fetched_at: datetime) -> Chu
         ),
         phone=data.phone,
         email=data.email,
+        service_times=[
+            ServiceTime(
+                name=service_time.name,
+                day_of_week=service_time.day_of_week,
+                time=service_time.time,
+                language=service_time.language,
+            )
+            for service_time in data.service_times
+        ],
         social_links=SocialLinks(
             facebook=_optional_url(data.social_links.get("facebook")),
             instagram=_optional_url(data.social_links.get("instagram")),

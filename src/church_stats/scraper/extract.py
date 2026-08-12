@@ -30,6 +30,14 @@ _CHURCH_JSONLD_TYPES = {"church", "localbusiness", "place", "religiousorganizati
 
 
 @dataclass
+class ExtractedServiceTime:
+    name: str | None = None
+    day_of_week: str | None = None
+    time: str | None = None
+    language: str | None = None
+
+
+@dataclass
 class ExtractedData:
     name: str | None = None
     description: str | None = None
@@ -41,6 +49,7 @@ class ExtractedData:
     postal_code: str | None = None
     country: str | None = None
     social_links: dict[str, str] = field(default_factory=dict)
+    service_times: list[ExtractedServiceTime] = field(default_factory=list)
 
 
 def _meta_content(
@@ -91,6 +100,16 @@ def _extract_social_links(soup: BeautifulSoup) -> dict[str, str]:
     return links
 
 
+def _flatten_jsonld(candidate: dict[str, object], entries: list[dict[str, object]]) -> None:
+    graph = candidate.get("@graph")
+    if isinstance(graph, list):
+        for item in graph:
+            if isinstance(item, dict):
+                _flatten_jsonld(item, entries)
+        return
+    entries.append(candidate)
+
+
 def _iter_jsonld(soup: BeautifulSoup) -> list[dict[str, object]]:
     entries: list[dict[str, object]] = []
     for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
@@ -103,7 +122,7 @@ def _iter_jsonld(soup: BeautifulSoup) -> list[dict[str, object]]:
         candidates = parsed if isinstance(parsed, list) else [parsed]
         for candidate in candidates:
             if isinstance(candidate, dict):
-                entries.append(candidate)
+                _flatten_jsonld(candidate, entries)
     return entries
 
 
@@ -134,9 +153,37 @@ def _apply_jsonld(entry: dict[str, object], data: ExtractedData) -> None:
         data.postal_code = data.postal_code or _str_or_none(address.get("postalCode"))
         data.country = data.country or _str_or_none(address.get("addressCountry"))
 
+    for spec in _as_list(entry.get("openingHoursSpecification")):
+        if isinstance(spec, dict):
+            data.service_times.extend(_service_times_from_spec(spec))
+
 
 def _str_or_none(value: object) -> str | None:
     return value if isinstance(value, str) else None
+
+
+def _as_list(value: object) -> list[object]:
+    if value is None:
+        return []
+    return value if isinstance(value, list) else [value]
+
+
+def _normalize_day_of_week(value: str) -> str:
+    return value.rsplit("/", 1)[-1]
+
+
+def _service_times_from_spec(spec: dict[str, object]) -> list[ExtractedServiceTime]:
+    name = _str_or_none(spec.get("name"))
+    opens = _str_or_none(spec.get("opens"))
+    days = [d for d in _as_list(spec.get("dayOfWeek")) if isinstance(d, str)]
+
+    if not days:
+        return [ExtractedServiceTime(name=name, time=opens)]
+
+    return [
+        ExtractedServiceTime(name=name, day_of_week=_normalize_day_of_week(day), time=opens)
+        for day in days
+    ]
 
 
 def extract(html: str) -> ExtractedData:
@@ -151,9 +198,26 @@ def extract(html: str) -> ExtractedData:
     for entry in _iter_jsonld(soup):
         if _jsonld_type_matches(entry):
             _apply_jsonld(entry, data)
+    data.service_times = _dedupe_service_times(data.service_times)
 
     phone, email = _extract_contact(soup.get_text(separator=" "))
     data.phone = data.phone or phone
     data.email = data.email or email
 
     return data
+
+
+def _dedupe_service_times(service_times: list[ExtractedServiceTime]) -> list[ExtractedServiceTime]:
+    seen: set[tuple[str | None, str | None, str | None, str | None]] = set()
+    deduped: list[ExtractedServiceTime] = []
+    for service_time in service_times:
+        key = (
+            service_time.name,
+            service_time.day_of_week,
+            service_time.time,
+            service_time.language,
+        )
+        if key not in seen:
+            seen.add(key)
+            deduped.append(service_time)
+    return deduped
